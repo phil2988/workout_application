@@ -28,3 +28,6 @@ flutter:
     - family: Workout
       fonts:
         -  asset: assets/Workout.ttf
+
+  assets:
+    - assets/components/

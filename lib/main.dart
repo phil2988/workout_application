@@ -26,16 +26,12 @@ class NavBar extends StatefulWidget {
 class _NavBar extends State<NavBar> {
   int selectedPageIndex = 0;
 
-  //static Workouts widget_workout;
-
-  // static const TextStyle fontStyle =
-  //    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> navBarWidgets = <Widget>[
-    Workouts("widget1"),
-    Workouts("widget2"),
-    Workouts("widget3"),
-    Workouts("widget4"),
-    Workouts("widget5"),
+  List<Widget> navBarWidgets = [
+    Workouts(),
+    Workouts(),
+    Workouts(),
+    Workouts(),
+    Workouts()
   ];
 
   void onItemTapped(int index) {
