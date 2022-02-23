@@ -10,3 +10,9 @@ const Color navBarUnSelected = Color.fromARGB(255, 255, 255, 255);
 
 // TextStyles
 const TextStyle buttonStyle = TextStyle(fontSize: 18, color: Colors.white);
+const TextStyle titleStyle = TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    height: 2.5);
+const TextStyle subTitleStyle = TextStyle(fontSize: 23, color: Colors.white);
