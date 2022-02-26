@@ -1,23 +1,31 @@
-import 'package:json_annotation/json_annotation.dart';
-
-@JsonSerializable()
 class ExerciseGroupModel {
   String categoryName;
-  List<ExerciseModel> exercises;
+  ExerciseModelList exercises;
 
   ExerciseGroupModel({required this.categoryName, required this.exercises});
 
   factory ExerciseGroupModel.fromJson(Map<String, dynamic> parsedJson) {
-    var exercisesFromJson = parsedJson["exercises"];
+    final exercisesFromJson = parsedJson["exercises"];
 
     return (ExerciseGroupModel(
       categoryName: parsedJson["categoryName"],
-      exercises: List<ExerciseModel>.from(exercisesFromJson),
+      exercises: ExerciseModelList.fromJson(exercisesFromJson),
     ));
   }
 }
 
-@JsonSerializable()
+class ExerciseModelList {
+  final List<ExerciseModel> exerciseModels;
+
+  ExerciseModelList({required this.exerciseModels});
+
+  factory ExerciseModelList.fromJson(List<dynamic> parsedJson) {
+    List<ExerciseModel> exerciseModels = [];
+    exerciseModels = parsedJson.map((e) => ExerciseModel.fromJson(e)).toList();
+    return ExerciseModelList(exerciseModels: exerciseModels);
+  }
+}
+
 class ExerciseModel {
   String exerciseName;
   String exerciseDescription;
@@ -29,7 +37,7 @@ class ExerciseModel {
       required this.gifLocations});
 
   factory ExerciseModel.fromJson(Map<String, dynamic> parsedJson) {
-    var gifLocationsFromJson = parsedJson["gifLocations"];
+    final gifLocationsFromJson = parsedJson["gifLocations"];
 
     return (ExerciseModel(
       exerciseName: parsedJson["exerciseName"],

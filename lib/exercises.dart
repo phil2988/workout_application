@@ -16,8 +16,9 @@ class Exercises extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder(
-            future: readJson(),
-            builder: (context, AsyncSnapshot<List<ExerciseModel>> snapshot) {
+            future: getExerciseGroups(),
+            builder:
+                (context, AsyncSnapshot<List<ExerciseGroupModel>> snapshot) {
               // Switch for error handling regarding json read
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -30,30 +31,47 @@ class Exercises extends StatelessWidget {
                   } else {
                     // Creates list of buttons for each exercise fetched
                     // from json if there is data
-                    List<Widget> buttons = [];
+                    List<Widget> organizedList = [];
                     if (snapshot.hasData) {
-                      for (var item in snapshot.data as List<ExerciseModel>) {
-                        buttons.add(FitnessButton(item.exerciseName));
+                      organizedList.add(Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0)));
+
+                      for (ExerciseGroupModel exerciseGroup
+                          in snapshot.data as List<ExerciseGroupModel>) {
+                        organizedList.add(Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0)));
+
+                        organizedList.add(Text(
+                          exerciseGroup.categoryName,
+                          style: subTitleStyle,
+                        ));
+
+                        organizedList.add(Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20)));
+                        List<Widget> buttons = [];
+
+                        for (var exercise
+                            in exerciseGroup.exercises.exerciseModels) {
+                          buttons.add(FitnessButton(exercise.exerciseName));
+                        }
+
+                        organizedList.add(Wrap(children: buttons));
                       }
                     }
+
                     return Container(
                         color: background,
                         alignment: Alignment.center,
-                        child: Column(children: [
-                          const Text("Choose A Workout", style: titleStyle),
-                          const Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                          const Text("Bænkpres", style: subTitleStyle),
-                          const Padding(
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
-                          Wrap(children: buttons),
-                        ]));
+                        child: SingleChildScrollView(
+                            child: Column(
+                          children: organizedList,
+                        )));
                   }
               }
             }));
   }
 
-  Future<List<ExerciseModel>> readJson() async {
+  Future<List<ExerciseModel>> getExercisesFromGroup() async {
     String jsonString = await rootBundle.loadString("data/exerciseData.json");
     final jsonResponse = jsonDecode(jsonString);
     List<ExerciseModel> exercises = [];
@@ -63,5 +81,17 @@ class Exercises extends StatelessWidget {
     }
 
     return exercises;
+  }
+
+  Future<List<ExerciseGroupModel>> getExerciseGroups() async {
+    String jsonString = await rootBundle.loadString("data/exerciseData.json");
+    final jsonResponse = jsonDecode(jsonString);
+    List<ExerciseGroupModel> exerciseGroups = [];
+
+    for (var exerciseGroup in jsonResponse) {
+      exerciseGroups.add(ExerciseGroupModel.fromJson(exerciseGroup));
+    }
+
+    return exerciseGroups;
   }
 }

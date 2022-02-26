@@ -1,87 +1,267 @@
-{
+[{    
     "categoryName": "Bench Press",
     "exercises": [
         {
-            "exerciseName": "Test Exercise",
-            "exerciseDescription" : "aglkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "flat benchpress",
+            "exerciseDescription" : "",
             "gifLocations": [
-                "Gif location1", 
-                "Gif location2", 
-                "Gif location3"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "narrrow grip benchpress",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "incline benchpress",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "decline benchpress",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
+            ]
+        }
+    ]
+},
+{    
+    "categoryName": "Squads",
+    "exercises" : [
+        {
+            "exerciseName": "high bar back squat",
+            "exerciseDescription": "A high bar squat is a variant of squat where the bar is placed high up on the trapezius muscle (the upper back). Feet are positioned at shoulder width with toes pointing slightly outwards",
+            "gifLocations": [
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "low bar back squat",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "airsquat ",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "front squat ",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "bulgarian split squat",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
             ]
         },
         {
-            "exerciseName": "Test Exercise2",
-            "exerciseDescription" : "agaaa sggg agh jhlkjhal lak sl lg lah khgs jghlj a slhk aouhg oh 9 akldh9iahlh gæaj alhs kjh lgjka lshf jkagsfj æ alh skjh alfg æalk ægkj lakh spkd",
+            "exerciseName": "pistol squat",
+            "exerciseDescription": "",
             "gifLocations": [
-                "Gif location4", 
-                "Gif location5", 
-                "Gif location6"
+                ""
+            ]
+        },
+        {
+            "exerciseName": "jump squat",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "sissy squat",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "overhead squat",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
             ]
         }
         
     ]
+},
+{
+    "categoryName": "Deadlift",
+    "exercises" :[
+        {
+            "exerciseName": "konventionel dødløft",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "sumo dødløft",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "hex bar deadlift",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "Snatch Grip Deadlift",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "Romanian Deadlift",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "Stiff Legged Deadlift",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "Deficit Deadlift",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        }
+    ]
+},
+{
+    "categoryName": "Pullups",
+    "exercises": [
+        {
+            "exerciseName": "pull ups",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "chin up",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "negative pull ups",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "banded pull ups",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "weigthed pull ups",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        }
+    ]
+},
+{
+    "categoryName": "Shoulder Press",
+    "exercises": [
+        {
+            "exerciseName": "barbell military press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "barbell Z press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "Barbell push press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "doubel kettelbell overhead press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "singel arm landmine press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "dumbbell shoulder press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "shoulder press with bands",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "tempo shoulder press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        },
+        {
+            "exerciseName": "deadstop shoulder press",
+            "exerciseDescription": "",
+            "gifLocations": [
+                ""
+            ]
+        }
+    ]
 }
+]
+    
+
