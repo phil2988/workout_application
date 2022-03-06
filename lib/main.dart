@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:workout_application/exercise-info-page.dart';
 import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/exercises.dart';
-import 'package:workout_application/app_colors.dart';
+import 'package:workout_application/app_configs.dart';
 
 void main() => runApp(const AppShell());
 
@@ -29,7 +30,7 @@ class _NavBar extends State<NavBar> {
 
   List<Widget> navBarWidgets = [
     const Exercises(),
-    const Exercises(),
+    const ExerciseInfo("", "", ""),
     const Exercises(),
     const Exercises(),
     const Exercises()

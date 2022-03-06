@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:workout_application/app_colors.dart';
+import 'package:workout_application/app_configs.dart';
 
 class FitnessButton extends StatelessWidget {
   final String displayText;
+  final void Function() onPressed;
 
-  const FitnessButton(this.displayText, {Key? key}) : super(key: key);
+  const FitnessButton(this.displayText, this.onPressed, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
         child: ElevatedButton(
-          onPressed: () {},
-          child: Text(displayText),
+          onPressed: onPressed,
+          child: Text(displayText, style: contentStyle),
           style: ElevatedButton.styleFrom(
               textStyle: buttonStyle,
-              fixedSize: const Size(150, 50),
+              fixedSize: const Size(180, 65),
               primary: primary,
               onPrimary: Colors.white,
               shape: const StadiumBorder(

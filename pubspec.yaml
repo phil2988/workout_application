@@ -34,5 +34,5 @@ flutter:
         - asset: assets/fonts/Staatliches-Regular.ttf
         
   assets:
-    - assets/components/
     - data/
+    - assets/workout_gifs/

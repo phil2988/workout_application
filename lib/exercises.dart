@@ -4,7 +4,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:workout_application/app_colors.dart';
+import 'package:workout_application/app_configs.dart';
+import 'package:workout_application/exercise-info-page.dart';
 import 'package:workout_application/fitness_button.dart';
 
 import 'exercise_data_models.dart';
@@ -33,26 +34,36 @@ class Exercises extends StatelessWidget {
                     // from json if there is data
                     List<Widget> organizedList = [];
                     if (snapshot.hasData) {
-                      organizedList.add(Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0)));
+                      organizedList.add(const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 30, 0, 0)));
 
                       for (ExerciseGroupModel exerciseGroup
                           in snapshot.data as List<ExerciseGroupModel>) {
-                        organizedList.add(Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0)));
+                        organizedList.add(const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 10, 0, 0)));
 
                         organizedList.add(Text(
                           exerciseGroup.categoryName,
                           style: subTitleStyle,
                         ));
 
-                        organizedList.add(Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20)));
+                        organizedList.add(const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 20)));
                         List<Widget> buttons = [];
 
                         for (var exercise
                             in exerciseGroup.exercises.exerciseModels) {
-                          buttons.add(FitnessButton(exercise.exerciseName));
+                          buttons.add(FitnessButton(
+                              exercise.exerciseName,
+                              () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ExerciseInfo(
+                                                exercise.exerciseName,
+                                                exercise.exerciseDescription,
+                                                exercise.gifLocations)))
+                                  }));
                         }
 
                         organizedList.add(Wrap(children: buttons));
