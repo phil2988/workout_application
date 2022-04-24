@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:workout_application/exercise-info-page.dart';
 import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/exercises.dart';
 import 'package:workout_application/app_configs.dart';
 
-void main() => runApp(const AppShell());
+void main() {
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(const AppShell());
+}
 
 class AppShell extends StatelessWidget {
   const AppShell({Key? key}) : super(key: key);
@@ -82,5 +87,14 @@ class _NavBar extends State<NavBar> {
             onTap: onItemTapped,
           ),
         ));
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

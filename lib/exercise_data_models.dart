@@ -27,25 +27,23 @@ class ExerciseModelList {
 }
 
 class ExerciseModel {
-  String exerciseName;
-  String exerciseDescription;
-  List<String> gifLocations;
+  String name;
+  String description;
+  String images;
+  String category;
 
   ExerciseModel(
-      {required this.exerciseName,
-      required this.exerciseDescription,
-      required this.gifLocations});
+      {required this.name,
+      required this.description,
+      required this.category,
+      required this.images});
 
   factory ExerciseModel.fromJson(Map<String, dynamic> parsedJson) {
-    final gifLocationsFromJson = parsedJson["gifLocations"];
-
     return (ExerciseModel(
-      exerciseName: parsedJson["exerciseName"],
-      exerciseDescription: parsedJson["exerciseDescription"],
-      gifLocations: List<String>.from(gifLocationsFromJson),
+      name: parsedJson["name"],
+      description: parsedJson["description"],
+      images: parsedJson["images"],
+      category: parsedJson["category"],
     ));
   }
 }
-
-// var streetsFromJson = parsedJson['streets'];
-// List<String> streetsList = new List<String>.from(streetsFromJson);

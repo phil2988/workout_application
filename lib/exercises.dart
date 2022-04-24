@@ -1,12 +1,12 @@
 // import 'dart:convert';
 import 'dart:async';
-import 'dart:convert';
-
+import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/exercise-info-page.dart';
 import 'package:workout_application/fitness_button.dart';
+import 'package:http/http.dart' as http;
 
 import 'exercise_data_models.dart';
 
@@ -18,8 +18,7 @@ class Exercises extends StatelessWidget {
     return Scaffold(
         body: FutureBuilder(
             future: getExerciseGroups(),
-            builder:
-                (context, AsyncSnapshot<List<ExerciseGroupModel>> snapshot) {
+            builder: (context, AsyncSnapshot<List<ExerciseModel>> snapshot) {
               // Switch for error handling regarding json read
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -54,15 +53,15 @@ class Exercises extends StatelessWidget {
                         for (var exercise
                             in exerciseGroup.exercises.exerciseModels) {
                           buttons.add(FitnessButton(
-                              exercise.exerciseName,
+                              exercise.name,
                               () => {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => ExerciseInfo(
-                                                exercise.exerciseName,
-                                                exercise.exerciseDescription,
-                                                exercise.gifLocations)))
+                                                exercise.name,
+                                                exercise.description,
+                                                exercise.images)))
                                   }));
                         }
 
@@ -82,27 +81,39 @@ class Exercises extends StatelessWidget {
             }));
   }
 
-  Future<List<ExerciseModel>> getExercisesFromGroup() async {
-    String jsonString = await rootBundle.loadString("data/exerciseData.json");
-    final jsonResponse = jsonDecode(jsonString);
-    List<ExerciseModel> exercises = [];
+  // Future<List<ExerciseModel>> getExercisesFromGroup() async {
+  //   String jsonString = await rootBundle.loadString("data/exerciseData.json");
+  //   final jsonResponse = jsonDecode(jsonString);
+  //   List<ExerciseModel> exercises = [];
 
-    for (var exercise in jsonResponse["exercises"]) {
-      exercises.add(ExerciseModel.fromJson(exercise));
-    }
+  //   for (var exercise in jsonResponse["exercises"]) {
+  //     exercises.add(ExerciseModel.fromJson(exercise));
+  //   }
 
-    return exercises;
-  }
+  //   return exercises;
+  // }
 
-  Future<List<ExerciseGroupModel>> getExerciseGroups() async {
-    String jsonString = await rootBundle.loadString("data/exerciseData.json");
-    final jsonResponse = jsonDecode(jsonString);
-    List<ExerciseGroupModel> exerciseGroups = [];
+  Future<List<ExerciseModel>> getExerciseGroups() async {
+    List<ExerciseModel> exerciseGroups = [];
 
-    for (var exerciseGroup in jsonResponse) {
-      exerciseGroups.add(ExerciseGroupModel.fromJson(exerciseGroup));
-    }
+    // var url = Uri.parse(apiUrl + 'exercise');
+    //https://localhost:44311/exercise
+    var url = Uri.parse('https://10.0.2.2:7035/exercise');
 
+    Map<String, String> options = {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    };
+
+    var response = await http.get(url, headers: options);
+
+    var data = response.body;
+    // if (response.statusCode == 200) {
+    // var jsonResponse =
+    //     convert.json.decode(response.body) as List<ExerciseModel>;
     return exerciseGroups;
+    // } else {
+    //   throw ErrorSummary("Could not find any exercises");
+    // }
   }
 }
