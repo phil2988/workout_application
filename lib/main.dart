@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:workout_application/exercise-info-page.dart';
+import 'package:workout_application/exercises-page/exercise-info-page.dart';
 import 'package:workout_application/workout_icons.dart';
-import 'package:workout_application/exercises.dart';
+import 'package:workout_application/exercises-page/exercises-overview.dart';
 import 'package:workout_application/app_configs.dart';
 
 void main() {
@@ -34,11 +34,11 @@ class _NavBar extends State<NavBar> {
   int selectedPageIndex = 0;
 
   List<Widget> navBarWidgets = [
-    const Exercises(),
-    const ExerciseInfo("", "", ""),
-    const Exercises(),
-    const Exercises(),
-    const Exercises()
+    const ExercisesOverview(),
+    const ExercisesOverview(),
+    const ExercisesOverview(),
+    const ExercisesOverview(),
+    const ExercisesOverview()
   ];
 
   void onItemTapped(int index) {

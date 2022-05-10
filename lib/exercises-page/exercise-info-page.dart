@@ -45,7 +45,7 @@ class ExerciseInfo extends StatelessWidget {
                     style: contentStyle,
                   ),
                 )),
-            Image.asset("assets/workout_gifs/" + gifLocation[0])
+            // Image.asset("assets/workout_gifs/" + gifLocation[0])
           ],
         )));
   }

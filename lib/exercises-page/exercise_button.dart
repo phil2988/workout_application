@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
-class FitnessButton extends StatelessWidget {
+class ExerciseButton extends StatelessWidget {
   final String displayText;
   final void Function() onPressed;
 
-  const FitnessButton(this.displayText, this.onPressed, {Key? key})
+  const ExerciseButton(this.displayText, this.onPressed, {Key? key})
       : super(key: key);
 
   @override
