@@ -24,9 +24,23 @@ class ExercisesOverview extends StatelessWidget {
               // Switch for error handling regarding json read
               switch (exercises.connectionState) {
                 case ConnectionState.none:
-                  return const Center(child: Text("Error! No Connection!"));
+                  return Container(
+                    child: const Text(
+                      "Error! No Connection!",
+                      style: subTitleStyle,
+                    ),
+                    alignment: Alignment.topCenter,
+                    color: background,
+                  );
                 case ConnectionState.waiting:
-                  return const Center(child: Text("Loading..."));
+                  return Container(
+                    child: const Text(
+                      "Loading...",
+                      style: subTitleStyle,
+                    ),
+                    alignment: Alignment.topCenter,
+                    color: background,
+                  );
                 default:
                   if (exercises.hasError) {
                     return Center(child: Text("Error: ${exercises.error}"));
@@ -39,7 +53,7 @@ class ExercisesOverview extends StatelessWidget {
                     List<Widget> finalList = [];
 
                     for (var category in categories) {
-                      final exercisesInCategory =
+                      List<ExerciseModel> exercisesInCategory =
                           getExercisesWithCategory(category, exercisesData);
                       finalList.add(ExercisesOverviewCategory(
                           category, exercisesInCategory));

@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:workout_application/exercises-page/exercise-info-page.dart';
 import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/exercises-page/exercises-overview.dart';
 import 'package:workout_application/app_configs.dart';
+import 'package:workout_application/workouts-page/workouts-page.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -18,8 +18,10 @@ class AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: NavBar(),
-    );
+        home: Scaffold(
+      bottomNavigationBar: NavBar(),
+      backgroundColor: background,
+    ));
   }
 }
 
@@ -34,7 +36,7 @@ class _NavBar extends State<NavBar> {
   int selectedPageIndex = 0;
 
   List<Widget> navBarWidgets = [
-    const ExercisesOverview(),
+    const WorkoutsOverview(),
     const ExercisesOverview(),
     const ExercisesOverview(),
     const ExercisesOverview(),

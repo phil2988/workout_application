@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
 class ExerciseInfo extends StatelessWidget {
-  final title;
-  final description;
-  final gifLocation;
-
   const ExerciseInfo(this.title, this.description, this.gifLocation, {Key? key})
       : super(key: key);
+
+  final String title;
+  final String description;
+  final String gifLocation;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:
             AppBar(backgroundColor: background, title: const Text("Go Back")),
-        backgroundColor: background,
         body: SingleChildScrollView(
             child: Column(
           children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workout_application/exercises-page/exercise_button.dart';
+import 'package:workout_application/general-components/button.dart';
 
 import '../app_configs.dart';
 import '../models/exercise_data_models.dart';
@@ -19,12 +19,10 @@ class ExercisesOverviewCategory extends StatelessWidget {
     ));
   }
 
-  void onClick() {}
-
-  List<Widget> getChildren(context) {
+  List<Widget> getChildren(BuildContext context) {
     List<Widget> children = [];
-    List<ExerciseButton> column1 = [];
-    List<ExerciseButton> column2 = [];
+    List<AppButton> column1 = [];
+    List<AppButton> column2 = [];
 
     children.add(Text(
       category,
@@ -34,26 +32,12 @@ class ExercisesOverviewCategory extends StatelessWidget {
     int index = 0;
     for (ExerciseModel exercise in exercises) {
       if (index == 0) {
-        column1.add(ExerciseButton(
-            exercise.name,
-            () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ExerciseInfo(exercise.name,
-                              exercise.description, exercise.images)))
-                }));
+        column1.add(
+            AppButton(exercise.name, getButtonFunction(context, exercise)));
         index++;
       } else {
-        column2.add(ExerciseButton(
-            exercise.name,
-            () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ExerciseInfo(exercise.name,
-                              exercise.description, exercise.images)))
-                }));
+        column2.add(
+            AppButton(exercise.name, getButtonFunction(context, exercise)));
         index = 0;
       }
     }
@@ -68,5 +52,14 @@ class ExercisesOverviewCategory extends StatelessWidget {
       ],
     ));
     return children;
+  }
+
+  void Function() getButtonFunction(
+      BuildContext context, ExerciseModel exercise) {
+    return () => Navigator.push<void>(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const ExerciseInfo("YAAAA", "sdgsdfgsdh", "")));
   }
 }

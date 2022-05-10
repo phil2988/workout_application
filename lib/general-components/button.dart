@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
-class ExerciseButton extends StatelessWidget {
-  final String displayText;
+class AppButton extends StatelessWidget {
   final void Function() onPressed;
+  final String buttonText;
+  final double buttonWidth;
+  final double buttonHeight;
 
-  const ExerciseButton(this.displayText, this.onPressed, {Key? key})
-      : super(key: key);
+  const AppButton(
+    this.buttonText,
+    this.onPressed, {
+    Key? key,
+    this.buttonWidth = 180,
+    this.buttonHeight = 65,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +21,10 @@ class ExerciseButton extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(displayText, style: contentStyle),
+          child: Text(buttonText, style: contentStyle),
           style: ElevatedButton.styleFrom(
               textStyle: buttonStyle,
-              fixedSize: const Size(180, 65),
+              fixedSize: Size(buttonWidth, buttonHeight),
               primary: primary,
               onPrimary: Colors.white,
               shape: const StadiumBorder(
