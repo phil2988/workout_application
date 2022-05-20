@@ -60,6 +60,6 @@ class ExercisesOverviewCategory extends StatelessWidget {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                const ExerciseInfo("YAAAA", "sdgsdfgsdh", "")));
+                ExerciseInfo(exercise.name, exercise.category, "")));
   }
 }

@@ -12,20 +12,21 @@ class ExerciseInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
         appBar:
             AppBar(backgroundColor: background, title: const Text("Go Back")),
         body: SingleChildScrollView(
-            child: Column(
+            child:Padding(
+              padding: defaultPadding,
+              child: Column(
           children: [
             SizedBox(
                 width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Text(
+                child: Text(
                     title,
                     style: titleStyle,
                   ),
-                )),
+                ),
             const SizedBox(
                 width: double.infinity,
                 child: Padding(
@@ -46,6 +47,6 @@ class ExerciseInfo extends StatelessWidget {
                 )),
             // Image.asset("assets/workout_gifs/" + gifLocation[0])
           ],
-        )));
+        ))));
   }
 }

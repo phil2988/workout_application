@@ -33,23 +33,29 @@ class WorkoutsOverview extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       child: Column(children: [
                         AppButton(
-                          "",
+                          "Chest focused workout",
                           () async => {},
+                          textStyle: subTitleStyle,
                           buttonHeight: 100,
-                          buttonWidth: 300,
+                          buttonWidth: double.maxFinite,
+                          shape: const RoundedRectangleBorder(side: BorderSide(color: Colors.white, width: 3), borderRadius: BorderRadius.all(Radius.circular(15))),
                         ),
                         AppButton(
-                          "",
+                          "Workout that makes your legs die",
                           () async => {},
+                          textStyle: subTitleStyle,
                           buttonHeight: 100,
-                          buttonWidth: 350,
+                          buttonWidth: double.maxFinite,
+                          shape: const RoundedRectangleBorder(side: BorderSide(color: Colors.white, width: 3), borderRadius: BorderRadius.all(Radius.circular(15))),
                         ),
                         AppButton(
-                          "",
+                          "I like big buts and i cannot lie",
                           () async => {},
+                          textStyle: subTitleStyle,
                           buttonHeight: 100,
-                          buttonWidth: 350,
-                        )
+                          buttonWidth: double.maxFinite,
+                          shape: const RoundedRectangleBorder(side: BorderSide(color: Colors.white, width: 3), borderRadius: BorderRadius.all(Radius.circular(15))),
+                        ),
                       ]),
                     ));
                   }

@@ -16,3 +16,5 @@ const TextStyle subTitleStyle = TextStyle(fontSize: 30, color: Colors.white);
 const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
 
 const String apiUrl = "http://172.21.240.1:7035/";
+
+const defaultPadding = EdgeInsets.fromLTRB(10, 10, 10, 10);
