@@ -1,20 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:workout_application/start_workout/start_workout_page.dart';
 import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/workouts_page/workouts_overview_page.dart';
-
 import 'exercises_page/exercises_overview_page.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const AppShell());
+  runApp(const RootWidget());
 }
 
-class AppShell extends StatelessWidget {
-  const AppShell({Key? key}) : super(key: key);
+class RootWidget extends StatelessWidget {
+  const RootWidget({Key? key}) : super(key: key);
 
-  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -29,16 +28,16 @@ class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<NavBar> createState() => _NavBar();
+  State<NavBar> createState() => _Navbar();
 }
 
-class _NavBar extends State<NavBar> {
+class _Navbar extends State<NavBar> {
   int selectedPageIndex = 0;
 
-  List<Widget> navBarWidgets = [
+  List<Widget> pages = [
     const WorkoutsOverview(),
     const ExercisesOverview(),
-    const ExercisesOverview(),
+    const StartWorkout(),
     const ExercisesOverview(),
     const ExercisesOverview()
   ];
@@ -46,49 +45,62 @@ class _NavBar extends State<NavBar> {
   void onItemTapped(int index) {
     setState(() {
       selectedPageIndex = index;
+      debugPrint("State is now: " + selectedPageIndex.toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "workoutApp",
+        title: "WorkoutApp",
         theme: ThemeData(fontFamily: "Staatliches"),
         home: Scaffold(
-          body: Center(
-            child: navBarWidgets.elementAt(selectedPageIndex),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Workout.barbell),
-                label: "Workouts",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Workout.pulse),
-                label: "Exercises",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Workout.add,
-                ),
-                label: "Start Workout",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Workout.settings),
-                label: "Settings",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Workout.user),
-                label: "Profile",
-              ),
-            ],
-            currentIndex: selectedPageIndex,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: primary,
-            selectedItemColor: navBarSelected,
-            unselectedItemColor: navBarUnSelected,
-            onTap: onItemTapped,
+          body: Center(child: pages.elementAt(selectedPageIndex)),
+          bottomNavigationBar: Container(
+              color: primary,
+              child: SizedBox(
+                  height: 65,
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AppNavbarItem(
+                          Workout.barbell, "Workouts", () => onItemTapped(0)),
+                      AppNavbarItem(
+                          Workout.pulse, "Exercises", () => onItemTapped(1)),
+                      AppNavbarItem(
+                          Workout.add, "Start Workout", () => onItemTapped(2)),
+                      AppNavbarItem(
+                          Workout.settings, "Settings", () => onItemTapped(3)),
+                      AppNavbarItem(
+                          Workout.user, "Profile", () => onItemTapped(4)),
+                    ],
+                  ))),
+        ));
+  }
+}
+
+class AppNavbarItem extends StatelessWidget {
+  const AppNavbarItem(this.icon, this.text, this.onTap, {Key? key})
+      : super(key: key);
+
+  final IconData icon;
+  final String text;
+  final void Function() onTap;
+
+  @override
+  build(BuildContext context) {
+    return Material(
+        color: primary,
+        child: InkWell(
+          customBorder: const StadiumBorder(),
+          onTap: onTap,
+          child: Padding(
+            padding: defaultPadding,
+            child: Column(
+              children: [Icon(icon, size: 25), Text(text)],
+            ),
           ),
         ));
   }
