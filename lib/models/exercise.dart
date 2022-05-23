@@ -1,24 +1,17 @@
-class ExerciseGroupModel {
-  String categoryName;
-  List<ExerciseModel> exercises;
-
-  ExerciseGroupModel({required this.categoryName, required this.exercises});
-}
-
-class ExerciseModel {
+class Exercise {
   String name;
   String description;
   String images;
   String category;
 
-  ExerciseModel(
+  Exercise(
       {required this.name,
       required this.description,
       required this.category,
       required this.images});
 
-  factory ExerciseModel.fromJson(Map<String, dynamic> parsedJson) {
-    return (ExerciseModel(
+  factory Exercise.fromJson(Map<String, dynamic> parsedJson) {
+    return (Exercise(
       name: parsedJson["name"],
       description: parsedJson["description"],
       images: parsedJson["images"],
