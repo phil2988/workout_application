@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:workout_application/workout_icons.dart';
-import 'package:workout_application/exercises-page/exercises-overview.dart';
 import 'package:workout_application/app_configs.dart';
-import 'package:workout_application/workouts-page/workouts-page.dart';
+import 'package:workout_application/workouts_page/workouts_overview_page.dart';
+
+import 'exercises_page/exercises_overview_page.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -66,11 +66,13 @@ class _NavBar extends State<NavBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Workout.pulse),
-                label: "Pulse",
+                label: "Exercises",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Workout.add),
-                label: "New Workout",
+                icon: Icon(
+                  Workout.add,
+                ),
+                label: "Start Workout",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Workout.settings),

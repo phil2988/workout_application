@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:workout_application/general-components/button.dart';
+import 'package:workout_application/general-components/app_button.dart';
 
 import '../app_configs.dart';
-import '../models/exercise_data_models.dart';
-import 'exercise-info-page.dart';
+import '../models/exercise.dart';
+import 'exercise_details.dart';
 
-class ExercisesOverviewCategory extends StatelessWidget {
+class ExercisesCategoryOverview extends StatelessWidget {
   final String category;
-  final List<ExerciseModel> exercises;
+  final List<Exercise> exercises;
 
-  const ExercisesOverviewCategory(this.category, this.exercises, {Key? key})
+  const ExercisesCategoryOverview(this.category, this.exercises, {Key? key})
       : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class ExercisesOverviewCategory extends StatelessWidget {
     ));
 
     int index = 0;
-    for (ExerciseModel exercise in exercises) {
+    for (Exercise exercise in exercises) {
       if (index == 0) {
         column1.add(
             AppButton(exercise.name, getButtonFunction(context, exercise)));
@@ -54,12 +54,11 @@ class ExercisesOverviewCategory extends StatelessWidget {
     return children;
   }
 
-  void Function() getButtonFunction(
-      BuildContext context, ExerciseModel exercise) {
+  void Function() getButtonFunction(BuildContext context, Exercise exercise) {
     return () => Navigator.push<void>(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ExerciseInfo(exercise.name, exercise.category, "")));
+                ExerciseDetails(exercise.name, exercise.category, "")));
   }
 }
