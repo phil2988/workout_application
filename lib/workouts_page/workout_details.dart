@@ -3,6 +3,7 @@ import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/models/list_of_exercises.dart';
 
 import '../general-components/app_card.dart';
+import '../general_functions/onTapFunctions.dart';
 
 class WorkoutDetails extends StatelessWidget {
   const WorkoutDetails(this.title, this.description, this.exercises, {Key? key})
@@ -16,7 +17,8 @@ class WorkoutDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     List<AppCard> exerciseCards = [];
     for (var item in exercises.exercises) {
-      exerciseCards.add(AppCard(item.name, item.description, () {}));
+      exerciseCards.add(AppCard(
+          item.name, item.description, exerciseAppButtonOnTap(context, item)));
     }
 
     return Scaffold(

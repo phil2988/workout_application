@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:workout_application/general-components/app_card.dart';
-import 'package:workout_application/workouts_page/workout_details.dart';
 import '../app_configs.dart';
+import '../general_functions/onTapFunctions.dart';
 import '../models/workout.dart';
 
 class WorkoutsOverview extends StatelessWidget {
@@ -48,7 +48,7 @@ class WorkoutsOverview extends StatelessWidget {
 
                     for (var item in workouts.data as List<Workout>) {
                       cards.add(AppCard(item.title, item.description,
-                          getButtonFunction(context, item)));
+                          workoutCardOnTap(context, item)));
                     }
 
                     return SingleChildScrollView(
@@ -83,12 +83,4 @@ Future<List<Workout>> getWorkouts() async {
   }
 
   throw ErrorSummary("Could not find any exercises");
-}
-
-void Function() getButtonFunction(BuildContext context, Workout workout) {
-  return () => Navigator.push<void>(
-      context,
-      MaterialPageRoute(
-          builder: (context) => WorkoutDetails(
-              workout.title, workout.description, workout.exercises)));
 }

@@ -45,7 +45,6 @@ class _Navbar extends State<NavBar> {
   void onItemTapped(int index) {
     setState(() {
       selectedPageIndex = index;
-      debugPrint("State is now: " + selectedPageIndex.toString());
     });
   }
 
@@ -64,20 +63,19 @@ class _Navbar extends State<NavBar> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AppNavbarItem(
-                          Workout.barbell, "Workouts", () => onItemTapped(0)),
-                      AppNavbarItem(
-                          Workout.pulse, "Exercises", () => onItemTapped(1)),
-                      AppNavbarItem(
-                          Workout.add, "Start Workout", () => onItemTapped(2)),
-                      AppNavbarItem(
-                          Workout.settings, "Settings", () => onItemTapped(3)),
-                      AppNavbarItem(
-                          Workout.user, "Profile", () => onItemTapped(4)),
-                    ],
+                    children: getChildren(),
                   ))),
         ));
+  }
+
+  List<Widget> getChildren() {
+    return [
+      AppNavbarItem(Workout.barbell, "Workouts", () => onItemTapped(0)),
+      AppNavbarItem(Workout.pulse, "Exercises", () => onItemTapped(1)),
+      AppNavbarItem(Workout.add, "Start Workout", () => onItemTapped(2)),
+      AppNavbarItem(Workout.settings, "Settings", () => onItemTapped(3)),
+      AppNavbarItem(Workout.user, "Profile", () => onItemTapped(4)),
+    ];
   }
 }
 
