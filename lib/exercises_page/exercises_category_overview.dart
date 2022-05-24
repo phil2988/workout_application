@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/general-components/app_button.dart';
 
 import '../app_configs.dart';
+import '../general_functions/onTapFunctions.dart';
 import '../models/exercise.dart';
 import 'exercise_details.dart';
 
@@ -32,12 +33,12 @@ class ExercisesCategoryOverview extends StatelessWidget {
     int index = 0;
     for (Exercise exercise in exercises) {
       if (index == 0) {
-        column1.add(
-            AppButton(exercise.name, getButtonFunction(context, exercise)));
+        column1.add(AppButton(
+            exercise.name, exerciseAppButtonOnTap(context, exercise)));
         index++;
       } else {
-        column2.add(
-            AppButton(exercise.name, getButtonFunction(context, exercise)));
+        column2.add(AppButton(
+            exercise.name, exerciseAppButtonOnTap(context, exercise)));
         index = 0;
       }
     }
@@ -52,13 +53,5 @@ class ExercisesCategoryOverview extends StatelessWidget {
       ],
     ));
     return children;
-  }
-
-  void Function() getButtonFunction(BuildContext context, Exercise exercise) {
-    return () => Navigator.push<void>(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ExerciseDetails(exercise.name, exercise.category, "")));
   }
 }
