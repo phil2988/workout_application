@@ -44,8 +44,6 @@ class ExercisesOverview extends StatelessWidget {
                     return Center(child: Text("Error: ${exercises.error}"));
                   } else {
                     final exercisesData = exercises.data as List<Exercise>;
-                    // Creates list of buttons for each exercise fetched
-                    // from json if there is data
                     final categories =
                         getUniqueCategoriesWithExercises(exercisesData);
                     List<Widget> finalList = [];
@@ -57,13 +55,16 @@ class ExercisesOverview extends StatelessWidget {
                           category, exercisesInCategory));
                     }
 
-                    return Container(
-                        color: background,
-                        alignment: Alignment.center,
-                        child: SingleChildScrollView(
-                            child: Column(
-                          children: finalList,
-                        )));
+                    return FractionallySizedBox(
+                        widthFactor: 1,
+                        heightFactor: 1,
+                        child: Container(
+                            color: background,
+                            alignment: Alignment.center,
+                            child: SingleChildScrollView(
+                                child: Column(
+                              children: finalList,
+                            ))));
                   }
               }
             }));

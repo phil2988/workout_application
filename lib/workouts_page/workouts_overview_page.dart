@@ -51,11 +51,14 @@ class WorkoutsOverview extends StatelessWidget {
                           workoutCardOnTap(context, item)));
                     }
 
-                    return SingleChildScrollView(
-                        child: Container(
-                      alignment: Alignment.topCenter,
-                      child: Column(children: cards),
-                    ));
+                    return FractionallySizedBox(
+                        widthFactor: 1,
+                        heightFactor: 1,
+                        child: SingleChildScrollView(
+                            child: Container(
+                          alignment: Alignment.topCenter,
+                          child: Column(children: cards),
+                        )));
                   }
               }
             }));
