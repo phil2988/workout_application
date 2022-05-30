@@ -4,7 +4,6 @@ import 'package:workout_application/general-components/app_button.dart';
 import '../app_configs.dart';
 import '../general_functions/onTapFunctions.dart';
 import '../models/exercise.dart';
-import 'exercise_details.dart';
 
 class ExercisesCategoryOverview extends StatelessWidget {
   final String category;
@@ -15,20 +14,12 @@ class ExercisesCategoryOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Column(
-      children: getChildren(context),
-    ));
+    return getChildren(context);
   }
 
-  List<Widget> getChildren(BuildContext context) {
-    List<Widget> children = [];
+  Widget getChildren(BuildContext context) {
     List<AppButton> column1 = [];
     List<AppButton> column2 = [];
-
-    children.add(Text(
-      category,
-      style: subTitleStyle,
-    ));
 
     int index = 0;
     for (Exercise exercise in exercises) {
@@ -42,16 +33,30 @@ class ExercisesCategoryOverview extends StatelessWidget {
         index = 0;
       }
     }
-    children.add(Row(
+
+    var categoryText = Text(
+      category,
+      style: subTitleStyle,
+    );
+
+    var exerciseColumns = Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(children: column1),
-        Column(
-          children: column2,
+        Expanded(
+          child: Column(children: column1),
+          flex: 1,
+        ),
+        Expanded(
+          child: Column(
+            children: column2,
+          ),
+          flex: 1,
         )
       ],
-    ));
-    return children;
+    );
+    return Column(
+      children: [categoryText, exerciseColumns],
+    );
   }
 }

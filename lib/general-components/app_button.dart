@@ -16,22 +16,22 @@ class AppButton extends StatelessWidget {
     this.textStyle = buttonStyle,
     this.buttonWidth = 180,
     this.buttonHeight = 65,
-    this.shape = const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
+    this.shape =
+        const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: defaultPadding,
+        padding: buttonPadding,
         child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text(buttonText, style: contentStyle),
-          style: ElevatedButton.styleFrom(
-              textStyle: textStyle,
-              fixedSize: Size(buttonWidth, buttonHeight),
-              primary: primary,
-              onPrimary: Colors.white,
-              shape: shape
-        )));
+            onPressed: onPressed,
+            child: Text(buttonText, style: contentStyle),
+            style: ElevatedButton.styleFrom(
+                textStyle: textStyle,
+                fixedSize: Size(buttonWidth, buttonHeight),
+                primary: primary,
+                onPrimary: Colors.white,
+                shape: shape)));
   }
 }

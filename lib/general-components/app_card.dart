@@ -27,32 +27,29 @@ class AppCard extends StatelessWidget {
     }
 
     return Padding(
-      padding: defaultPadding,
-      child: ElevatedButton(
+        padding: defaultPadding,
+        child: ElevatedButton(
           onPressed: onPressed,
-          child: Padding(
-            padding: defaultPadding,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Align(
-                      alignment: Alignment.topLeft,
-                      child:
-                          FittedBox(child: Text(title, style: subTitleStyle))),
-                ),
-                Align(
                     alignment: Alignment.topLeft,
-                    child: Text(description, style: contentStyle))
-              ],
-            ),
+                    child: Text(title, style: subTitleStyle),
+                  )),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(description, style: contentStyle))
+            ],
           ),
           style: ElevatedButton.styleFrom(
               textStyle: textStyle,
               fixedSize: Size(buttonWidth, buttonHeight),
               primary: primary,
               onPrimary: Colors.white,
-              shape: shape)),
-    );
+              shape: shape),
+        ));
   }
 }

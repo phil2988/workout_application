@@ -18,4 +18,5 @@ const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
 // const String apiUrl = "https://10.0.2.2:7035/";
 const String apiUrl = "https://workout-application-backend.herokuapp.com/api/";
 
-const defaultPadding = EdgeInsets.fromLTRB(10, 10, 10, 10);
+const defaultPadding = EdgeInsets.all(10);
+const buttonPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 5);
