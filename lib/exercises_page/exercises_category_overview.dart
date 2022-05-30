@@ -34,11 +34,11 @@ class ExercisesCategoryOverview extends StatelessWidget {
     for (Exercise exercise in exercises) {
       if (index == 0) {
         column1.add(AppButton(
-            exercise.name, exerciseAppButtonOnTap(context, exercise)));
+            exercise.title, exerciseAppButtonOnTap(context, exercise)));
         index++;
       } else {
         column2.add(AppButton(
-            exercise.name, exerciseAppButtonOnTap(context, exercise)));
+            exercise.title, exerciseAppButtonOnTap(context, exercise)));
         index = 0;
       }
     }

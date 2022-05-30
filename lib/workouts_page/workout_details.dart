@@ -18,7 +18,7 @@ class WorkoutDetails extends StatelessWidget {
     List<AppCard> exerciseCards = [];
     for (var item in exercises.exercises) {
       exerciseCards.add(AppCard(
-          item.name, item.description, exerciseAppButtonOnTap(context, item)));
+          item.title, item.description, exerciseAppButtonOnTap(context, item)));
     }
 
     return Scaffold(
