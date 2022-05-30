@@ -19,5 +19,5 @@ void Function() exerciseAppButtonOnTap(
       context,
       MaterialPageRoute(
           builder: (context) =>
-              ExerciseDetails(exercise.name, exercise.description, "")));
+              ExerciseDetails(exercise.title, exercise.description, "")));
 }
