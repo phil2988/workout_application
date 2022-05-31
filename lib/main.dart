@@ -57,33 +57,41 @@ class _NavbarState extends State<NavBar> {
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       AppNavbarItem(
-                          icon: Workout.barbell,
-                          text: "Workouts",
-                          onTapEvent: () => updatePage(0),
-                          selected: selectedPageIndex == 0),
+                        icon: Workout.workoutsIcon,
+                        text: "Workouts",
+                        onTapEvent: () => updatePage(0),
+                        selected: selectedPageIndex == 0,
+                        iconPadding: const EdgeInsets.fromLTRB(0, 0, 13, 0),
+                      ),
                       AppNavbarItem(
-                          icon: Workout.pulse,
-                          text: "Exercises",
-                          onTapEvent: () => updatePage(1),
-                          selected: selectedPageIndex == 1),
+                        icon: Workout.exercisesIcon,
+                        text: "Exercises",
+                        onTapEvent: () => updatePage(1),
+                        selected: selectedPageIndex == 1,
+                        iconSize: 25,
+                      ),
                       AppNavbarItem(
-                          icon: Workout.add,
-                          text: "Start Workout",
-                          onTapEvent: () => updatePage(2),
-                          selected: selectedPageIndex == 2),
+                        icon: Workout.startWorkoutIcon,
+                        text: "Start Workout",
+                        onTapEvent: () => updatePage(2),
+                        selected: selectedPageIndex == 2,
+                        iconSize: 25,
+                      ),
                       AppNavbarItem(
-                          icon: Workout.settings,
+                          icon: Workout.settingsIcon,
                           text: "Settings",
                           onTapEvent: () => updatePage(3),
-                          selected: selectedPageIndex == 3),
+                          selected: selectedPageIndex == 3,
+                          iconSize: 25),
                       AppNavbarItem(
-                          icon: Workout.user,
+                          icon: Workout.profileIcon,
                           text: "Profile",
                           onTapEvent: () => updatePage(4),
-                          selected: selectedPageIndex == 4),
+                          selected: selectedPageIndex == 4,
+                          iconSize: 25),
                     ],
                   ))),
         ));
@@ -102,6 +110,9 @@ class AppNavbarItem extends StatelessWidget {
       required this.text,
       required this.onTapEvent,
       required this.selected,
+      this.iconSize = 20,
+      this.itemPadding = defaultPadding,
+      this.iconPadding = EdgeInsets.zero,
       Key? key})
       : super(key: key);
 
@@ -109,6 +120,9 @@ class AppNavbarItem extends StatelessWidget {
   final String text;
   final bool selected;
   final VoidCallback onTapEvent;
+  final double iconSize;
+  final EdgeInsets itemPadding;
+  final EdgeInsets iconPadding;
 
   @override
   build(BuildContext context) {
@@ -118,12 +132,16 @@ class AppNavbarItem extends StatelessWidget {
           customBorder: const StadiumBorder(),
           onTap: onTapEvent,
           child: Padding(
-            padding: defaultPadding,
+            padding: itemPadding,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(icon,
-                    size: 25,
-                    color: selected ? navBarUnSelected : navBarSelected),
+                Padding(
+                    padding: iconPadding,
+                    child: Icon(icon,
+                        size: iconSize,
+                        color: selected ? navBarUnSelected : navBarSelected)),
                 Text(
                   text,
                   style: TextStyle(
