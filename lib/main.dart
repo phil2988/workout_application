@@ -5,7 +5,6 @@ import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/workouts_page/workouts_overview_page.dart';
 import 'exercises_page/exercises_overview_page.dart';
-import 'package:event/event.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
