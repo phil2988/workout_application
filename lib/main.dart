@@ -5,6 +5,7 @@ import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/workouts_page/workouts_overview_page.dart';
 import 'exercises_page/exercises_overview_page.dart';
+import 'package:event/event.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -28,25 +29,19 @@ class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<NavBar> createState() => _Navbar();
+  State<NavBar> createState() => _NavbarState();
 }
 
-class _Navbar extends State<NavBar> {
-  int selectedPageIndex = 0;
+final List<Widget> _pages = [
+  const WorkoutsOverview(),
+  const ExercisesOverview(),
+  const StartWorkout(),
+  const ExercisesOverview(),
+  const ExercisesOverview()
+];
 
-  List<Widget> pages = [
-    const WorkoutsOverview(),
-    const ExercisesOverview(),
-    const StartWorkout(),
-    const ExercisesOverview(),
-    const ExercisesOverview()
-  ];
-
-  void onItemTapped(int index) {
-    setState(() {
-      selectedPageIndex = index;
-    });
-  }
+class _NavbarState extends State<NavBar> {
+  int selectedPageIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +49,7 @@ class _Navbar extends State<NavBar> {
         title: "WorkoutApp",
         theme: ThemeData(fontFamily: "Staatliches"),
         home: Scaffold(
-          body: Center(child: pages.elementAt(selectedPageIndex)),
+          body: Center(child: _pages.elementAt(selectedPageIndex)),
           bottomNavigationBar: Container(
               color: primary,
               child: SizedBox(
@@ -63,29 +58,57 @@ class _Navbar extends State<NavBar> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: getChildren(),
+                    children: [
+                      AppNavbarItem(
+                          icon: Workout.barbell,
+                          text: "Workouts",
+                          onTapEvent: () => updatePage(0),
+                          selected: selectedPageIndex == 0),
+                      AppNavbarItem(
+                          icon: Workout.pulse,
+                          text: "Exercises",
+                          onTapEvent: () => updatePage(1),
+                          selected: selectedPageIndex == 1),
+                      AppNavbarItem(
+                          icon: Workout.add,
+                          text: "Start Workout",
+                          onTapEvent: () => updatePage(2),
+                          selected: selectedPageIndex == 2),
+                      AppNavbarItem(
+                          icon: Workout.settings,
+                          text: "Settings",
+                          onTapEvent: () => updatePage(3),
+                          selected: selectedPageIndex == 3),
+                      AppNavbarItem(
+                          icon: Workout.user,
+                          text: "Profile",
+                          onTapEvent: () => updatePage(4),
+                          selected: selectedPageIndex == 4),
+                    ],
                   ))),
         ));
   }
 
-  List<Widget> getChildren() {
-    return [
-      AppNavbarItem(Workout.barbell, "Workouts", () => onItemTapped(0)),
-      AppNavbarItem(Workout.pulse, "Exercises", () => onItemTapped(1)),
-      AppNavbarItem(Workout.add, "Start Workout", () => onItemTapped(2)),
-      AppNavbarItem(Workout.settings, "Settings", () => onItemTapped(3)),
-      AppNavbarItem(Workout.user, "Profile", () => onItemTapped(4)),
-    ];
+  void updatePage(int index) {
+    setState(() {
+      selectedPageIndex = index;
+    });
   }
 }
 
 class AppNavbarItem extends StatelessWidget {
-  const AppNavbarItem(this.icon, this.text, this.onTap, {Key? key})
+  const AppNavbarItem(
+      {required this.icon,
+      required this.text,
+      required this.onTapEvent,
+      required this.selected,
+      Key? key})
       : super(key: key);
 
   final IconData icon;
   final String text;
-  final void Function() onTap;
+  final bool selected;
+  final VoidCallback onTapEvent;
 
   @override
   build(BuildContext context) {
@@ -93,11 +116,20 @@ class AppNavbarItem extends StatelessWidget {
         color: primary,
         child: InkWell(
           customBorder: const StadiumBorder(),
-          onTap: onTap,
+          onTap: onTapEvent,
           child: Padding(
             padding: defaultPadding,
             child: Column(
-              children: [Icon(icon, size: 25), Text(text)],
+              children: [
+                Icon(icon,
+                    size: 25,
+                    color: selected ? navBarUnSelected : navBarSelected),
+                Text(
+                  text,
+                  style: TextStyle(
+                      color: selected ? navBarUnSelected : navBarSelected),
+                )
+              ],
             ),
           ),
         ));
