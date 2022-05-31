@@ -26,23 +26,9 @@ class StartWorkout extends StatelessWidget {
               // Switch for error handling regarding json read
               switch (workout.connectionState) {
                 case ConnectionState.none:
-                  return Container(
-                    child: const Text(
-                      "Error! No Connection!",
-                      style: subTitleStyle,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: background,
-                  );
+                  return noConnectionContainer;
                 case ConnectionState.waiting:
-                  return Container(
-                    child: const Text(
-                      "Loading...",
-                      style: subTitleStyle,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: background,
-                  );
+                  return loadingContainer;
                 default:
                   if (workout.hasError) {
                     return Center(
@@ -52,15 +38,14 @@ class StartWorkout extends StatelessWidget {
                     ));
                   } else {
                     final workoutdata = workout.data as Workout;
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const Text("Choosen Workout"),
-                          AppCard(workoutdata.title, workoutdata.description,
-                              workoutCardOnTap(context, workoutdata)),
-                          AppButton("Start Workout", () {})
-                        ],
-                      ),
+                    return Column(
+                      children: [
+                        const Text("Choosen Workout"),
+                        AppCard(workoutdata.title, workoutdata.description,
+                            workoutCardOnTap(context, workoutdata)),
+                        AppButton("Start Workout",
+                            startWorkoutOnTap(context, workoutdata))
+                      ],
                     );
                   }
               }
@@ -85,3 +70,21 @@ Future<Workout> getDefaultWorkout() async {
 
   throw ErrorSummary("Could not find any exercises");
 }
+
+Widget noConnectionContainer = Container(
+  child: const Text(
+    "Error! No Connection!",
+    style: subTitleStyle,
+  ),
+  alignment: Alignment.topCenter,
+  color: background,
+);
+
+Widget loadingContainer = Container(
+  child: const Text(
+    "Loading...",
+    style: subTitleStyle,
+  ),
+  alignment: Alignment.topCenter,
+  color: background,
+);

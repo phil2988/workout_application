@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../exercises_page/exercise_details.dart';
 import '../models/exercise.dart';
 import '../models/workout.dart';
+import '../start_workout/active_workout_page.dart';
 import '../workouts_page/workout_details.dart';
 
-void Function() workoutCardOnTap(BuildContext context, Workout workout) {
+VoidCallback workoutCardOnTap(BuildContext context, Workout workout) {
   return () => Navigator.push<void>(
       context,
       MaterialPageRoute(
@@ -13,11 +14,17 @@ void Function() workoutCardOnTap(BuildContext context, Workout workout) {
               workout.title, workout.description, workout.exercises)));
 }
 
-void Function() exerciseAppButtonOnTap(
-    BuildContext context, Exercise exercise) {
+VoidCallback exerciseAppButtonOnTap(BuildContext context, Exercise exercise) {
   return () => Navigator.push<void>(
       context,
       MaterialPageRoute(
           builder: (context) =>
               ExerciseDetails(exercise.title, exercise.description, "")));
+}
+
+VoidCallback startWorkoutOnTap(BuildContext context, Workout workout) {
+  return () => Navigator.push<void>(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ActiveWorkoutPage(workout: workout)));
 }
