@@ -15,8 +15,19 @@ const TextStyle titleStyle =
 const TextStyle subTitleStyle = TextStyle(fontSize: 30, color: Colors.white);
 const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
 
+const TextStyle inputNumberStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 25,
+);
+
+const TextStyle kgTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 25,
+);
+
 // const String apiUrl = "https://10.0.2.2:7035/";
 const String apiUrl = "https://workout-application-backend.herokuapp.com/api/";
 
 const defaultPadding = EdgeInsets.all(10);
 const buttonPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 5);
+const titlePadding = EdgeInsets.fromLTRB(0, 20, 0, 10);
