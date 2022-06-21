@@ -1,7 +1,9 @@
 import 'package:workout_application/models/exercise.dart';
 
 class ExercisesList {
-  ExercisesList({required this.exercises});
+  ExercisesList({
+    required this.exercises
+  });
 
   final List<Exercise> exercises;
 

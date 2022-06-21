@@ -11,8 +11,7 @@ class AppButton extends StatelessWidget {
   final bool loading;
   final bool disabled;
 
-  const AppButton(
-  {
+  const AppButton({
     Key? key,
     required this.buttonText,
     required this.onPressed,
@@ -21,8 +20,7 @@ class AppButton extends StatelessWidget {
     this.textStyle = buttonStyle,
     this.buttonWidth = 180,
     this.buttonHeight = 65,
-    this.shape =
-        const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
+    this.shape = const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
   }) : super(key: key);
 
   @override

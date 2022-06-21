@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:workout_application/general-components/app_card.dart';
 import '../app_configs.dart';
-import '../general_functions/onTapFunctions.dart';
+import '../general_functions/on_tap_functions.dart';
 import '../models/workout.dart';
 
 class WorkoutsOverview extends StatelessWidget {
@@ -47,8 +47,13 @@ class WorkoutsOverview extends StatelessWidget {
                     List<AppCard> cards = [];
 
                     for (var item in workouts.data as List<Workout>) {
-                      cards.add(AppCard(item.title, item.description,
-                          workoutCardOnTap(context, item)));
+                      cards.add(
+                        AppCard(
+                          title: item.title, 
+                          description: item.description,
+                          onPressed: workoutCardOnTap(context, item)
+                        )
+                      );
                     }
 
                     return FractionallySizedBox(

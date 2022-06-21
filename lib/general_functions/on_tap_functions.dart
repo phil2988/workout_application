@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../exercises_page/exercise_details.dart';
 import '../models/exercise.dart';
 import '../models/workout.dart';
@@ -19,7 +17,7 @@ VoidCallback exerciseAppButtonOnTap(BuildContext context, Exercise exercise) {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              ExerciseDetails(exercise.title, exercise.description, "")));
+              ExerciseDetails(title: exercise.title, description: exercise.description, gifLocation: "")));
 }
 
 VoidCallback startWorkoutOnTap(BuildContext context, Workout workout) {

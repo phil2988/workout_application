@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import '../app_configs.dart';
 
 class AppCard extends StatelessWidget {
-  AppCard(this.title, this.description, this.onPressed,
-      {Key? key,
-      this.textStyle = buttonStyle,
-      this.buttonWidth = double.maxFinite,
-      this.buttonHeight = 150,
-      this.shape = const RoundedRectangleBorder(
-          side: BorderSide(color: Colors.white, width: 3),
-          borderRadius: BorderRadius.all(Radius.circular(15)))})
-      : super(key: key);
+  const AppCard({
+    Key? key,
+    required this.title, 
+    required this.description, 
+    required this.onPressed,
+    this.textStyle = buttonStyle,
+    this.buttonWidth = double.maxFinite,
+    this.buttonHeight = 150,
+    this.shape = const RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white, width: 3),
+        borderRadius: BorderRadius.all(Radius.circular(15)))})
+    : super(key: key);
 
   final String title;
-  String description;
+  final String description;
   final void Function() onPressed;
   final double buttonWidth;
   final double buttonHeight;
@@ -22,9 +25,7 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (description.length >= 100) {
-      description = description.substring(0, 100) + "...";
-    }
+    final cutDescription = description.length >= 100 ? description.substring(0, 100) + "..." : description;
 
     return Padding(
         padding: defaultPadding,
@@ -41,7 +42,7 @@ class AppCard extends StatelessWidget {
                   )),
               Align(
                   alignment: Alignment.topLeft,
-                  child: Text(description, style: contentStyle))
+                  child: Text(cutDescription, style: contentStyle))
             ],
           ),
           style: ElevatedButton.styleFrom(

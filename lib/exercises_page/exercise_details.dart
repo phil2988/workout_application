@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
 class ExerciseDetails extends StatelessWidget {
-  const ExerciseDetails(this.title, this.description, this.gifLocation,
-      {Key? key})
-      : super(key: key);
+  const ExerciseDetails({
+    Key? key,
+    required this.title, 
+    required this.description, 
+    required this.gifLocation
+    }) : super(key: key);
 
   final String title;
   final String description;

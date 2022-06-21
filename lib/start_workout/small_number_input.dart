@@ -1,18 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_application/app_configs.dart';
 
 class SmallNumberInput extends StatelessWidget {
-  const SmallNumberInput(
-      {Key? key,
-      required this.controller,
-      this.height = 50,
-      this.width = 50,
-      this.suffix = "",
-      this.text = "", 
-      })
-      : super(key: key);
+  const SmallNumberInput({
+    required this.controller,
+    this.height = 50,
+    this.width = 50,
+    this.suffix = "",
+    this.text = "", 
+    Key? key
+  }) : super(key: key);
 
   final double height;
   final double width;

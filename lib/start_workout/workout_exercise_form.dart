@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/general-components/app_button.dart';
-import 'package:workout_application/models/exercise-data.dart';
 import 'package:workout_application/models/exercise.dart';
-import 'package:workout_application/start_workout/small-number-input.dart';
+import 'package:workout_application/models/exercise_data.dart';
+import 'package:workout_application/start_workout/small_number_input.dart';
 
-import '../general_functions/backend-submits.dart';
+import '../general_functions/backend_submits.dart';
 
 class WorkoutExerciseForm extends StatefulWidget {
-  const WorkoutExerciseForm(
-      {
-        required this.exercises, 
-        Key? key
-      }) : super(key: key);
+  const WorkoutExerciseForm({
+    required this.exercises, 
+    Key? key
+  }) : super(key: key);
 
   final List<Exercise> exercises;
 
@@ -56,7 +54,9 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
 
   _updateIsValid() {
     setState(() {
-      isValid = repsController.text.isNotEmpty && setsController.text.isNotEmpty && weightController.text.isNotEmpty;
+      isValid = repsController.text.isNotEmpty && 
+                setsController.text.isNotEmpty && 
+                weightController.text.isNotEmpty;
     });
   }
 

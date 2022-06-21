@@ -9,8 +9,11 @@ class ExercisesCategoryOverview extends StatelessWidget {
   final String category;
   final List<Exercise> exercises;
 
-  const ExercisesCategoryOverview(this.category, this.exercises, {Key? key})
-      : super(key: key);
+  const ExercisesCategoryOverview({
+    Key? key,
+    required this.category, 
+    required this.exercises,
+    }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

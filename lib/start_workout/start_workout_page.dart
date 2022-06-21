@@ -3,54 +3,59 @@ import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/general-components/app_card.dart';
 
 import '../general-components/app_button.dart';
-import '../general_functions/onTapFunctions.dart';
+import '../general_functions/on_tap_functions.dart';
 import '../models/workout.dart';
 
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 class StartWorkout extends StatelessWidget {
-  const StartWorkout({Key? key}) : super(key: key);
+  const StartWorkout({
+    Key? key
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: background,
-        appBar: AppBar(
-            backgroundColor: background,
-            title: const Text("Start Workout", style: titleStyle),
-            centerTitle: true),
-        body: FutureBuilder(
-            future: getDefaultWorkout(),
-            builder: (context, AsyncSnapshot<Workout> workout) {
-              // Switch for error handling regarding json read
-              switch (workout.connectionState) {
-                case ConnectionState.none:
-                  return noConnectionContainer;
-                case ConnectionState.waiting:
-                  return loadingContainer;
-                default:
-                  if (workout.hasError) {
-                    return Center(
-                        child: Text(
-                      "Error: ${workout.error}",
-                      style: subTitleStyle,
-                    ));
-                  } else {
-                    final workoutdata = workout.data as Workout;
-                    return Column(
-                      children: [
-                        const Padding(padding: titlePadding, child: Text("Choosen Workout", style: subTitleStyle,),
-                        ),
-                        AppCard(workoutdata.title, workoutdata.description,
-                            workoutCardOnTap(context, workoutdata)),
-                        AppButton( buttonText: "Start Workout",
-                            onPressed: startWorkoutOnTap(context, workoutdata))
-                      ],
-                    );
-                  }
+      backgroundColor: background,
+      appBar: AppBar(
+          backgroundColor: background,
+          title: const Text("Start Workout", style: titleStyle),
+          centerTitle: true),
+      body: FutureBuilder(
+        future: getDefaultWorkout(),
+        builder: (context, AsyncSnapshot<Workout> workout) {
+          // Switch for error handling regarding json read
+          switch (workout.connectionState) {
+            case ConnectionState.none: 
+              return noConnectionContainer;
+            case ConnectionState.waiting:
+              return loadingContainer;
+            default:
+              if (workout.hasError) {
+                return Center(
+                    child: Text(
+                  "Error: ${workout.error}",
+                  style: subTitleStyle,
+                ));
+              } 
+              else {
+                final workoutdata = workout.data as Workout;
+                return Column(
+                  children: [
+                    const Padding(padding: titlePadding, child: Text("Choosen Workout", style: subTitleStyle,),
+                    ),
+                    AppCard(title: workoutdata.title, description: workoutdata.description,
+                        onPressed: workoutCardOnTap(context, workoutdata)),
+                    AppButton( buttonText: "Start Workout",
+                        onPressed: startWorkoutOnTap(context, workoutdata))
+                  ],
+                );
               }
-            }));
+          }
+        }
+      )
+    );
   }
 }
 

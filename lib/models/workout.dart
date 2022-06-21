@@ -1,10 +1,11 @@
 import 'package:workout_application/models/list_of_exercises.dart';
 
 class Workout {
-  Workout(
-      {required this.title,
-      required this.description,
-      required this.exercises});
+  Workout({
+    required this.title,
+    required this.description,
+    required this.exercises
+  });
 
   final String title;
   final String description;

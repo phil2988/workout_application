@@ -52,7 +52,7 @@ class ExercisesOverview extends StatelessWidget {
                       List<Exercise> exercisesInCategory =
                           getExercisesWithCategory(category, exercisesData);
                       finalList.add(ExercisesCategoryOverview(
-                          category, exercisesInCategory));
+                          category: category, exercises: exercisesInCategory));
                     }
 
                     return FractionallySizedBox(
