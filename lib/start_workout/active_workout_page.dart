@@ -21,15 +21,9 @@ class ActiveWorkoutPage extends StatelessWidget {
             centerTitle: true),
         body: Column(
           children: [
-            Padding(
-                padding: titlePadding,
-                child: Text(
-                  workout.exercises.exercises[currentExercise].title,
-                  style: subTitleStyle,
-                )),
             WorkoutExerciseForm(
-                exercise: workout.exercises.exercises[currentExercise],
-                onSubmit: () {}),
+                exercises: workout.exercises.exercises,
+            ),
           ],
         ));
   }

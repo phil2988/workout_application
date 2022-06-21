@@ -25,11 +25,11 @@ class ExercisesCategoryOverview extends StatelessWidget {
     for (Exercise exercise in exercises) {
       if (index == 0) {
         column1.add(AppButton(
-            exercise.title, exerciseAppButtonOnTap(context, exercise)));
+           buttonText: exercise.title, onPressed: exerciseAppButtonOnTap(context, exercise)));
         index++;
       } else {
         column2.add(AppButton(
-            exercise.title, exerciseAppButtonOnTap(context, exercise)));
+           buttonText: exercise.title, onPressed: exerciseAppButtonOnTap(context, exercise)));
         index = 0;
       }
     }

@@ -40,11 +40,12 @@ class StartWorkout extends StatelessWidget {
                     final workoutdata = workout.data as Workout;
                     return Column(
                       children: [
-                        const Text("Choosen Workout"),
+                        const Padding(padding: titlePadding, child: Text("Choosen Workout", style: subTitleStyle,),
+                        ),
                         AppCard(workoutdata.title, workoutdata.description,
                             workoutCardOnTap(context, workoutdata)),
-                        AppButton("Start Workout",
-                            startWorkoutOnTap(context, workoutdata))
+                        AppButton( buttonText: "Start Workout",
+                            onPressed: startWorkoutOnTap(context, workoutdata))
                       ],
                     );
                   }

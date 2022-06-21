@@ -8,11 +8,16 @@ class AppButton extends StatelessWidget {
   final double buttonHeight;
   final OutlinedBorder shape;
   final TextStyle textStyle;
+  final bool loading;
+  final bool disabled;
 
   const AppButton(
-    this.buttonText,
-    this.onPressed, {
+  {
     Key? key,
+    required this.buttonText,
+    required this.onPressed,
+    this.disabled = false,
+    this.loading = false,
     this.textStyle = buttonStyle,
     this.buttonWidth = 180,
     this.buttonHeight = 65,
@@ -25,8 +30,8 @@ class AppButton extends StatelessWidget {
     return Padding(
         padding: buttonPadding,
         child: ElevatedButton(
-            onPressed: onPressed,
-            child: Text(buttonText, style: contentStyle),
+            onPressed: loading || disabled? null: onPressed,
+            child: loading? const CircularProgressIndicator() : Text(buttonText, style: contentStyle),
             style: ElevatedButton.styleFrom(
                 textStyle: textStyle,
                 fixedSize: Size(buttonWidth, buttonHeight),
