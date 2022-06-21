@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:workout_application/models/exercise-data.dart';
-
 import '../app_configs.dart';
+import '../models/exercise_data.dart';
 
 Future<int> submitExerciseData(ExerciseData exerciseData) async {
     Map<String, String> options = {

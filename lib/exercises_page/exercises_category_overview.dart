@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/general-components/app_button.dart';
-
 import '../app_configs.dart';
-import '../general_functions/onTapFunctions.dart';
+import '../general_functions/on_tap_functions.dart';
 import '../models/exercise.dart';
 
 class ExercisesCategoryOverview extends StatelessWidget {
