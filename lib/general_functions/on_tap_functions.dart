@@ -18,7 +18,7 @@ VoidCallback exerciseAppButtonOnTap(BuildContext context, Exercise exercise) {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              ExerciseDetails(title: exercise.title, description: exercise.description, gifLocation: "")));
+              ExerciseDetails(title: exercise.title, description: exercise.description, imageUrl: "")));
 }
 
 VoidCallback startWorkoutOnTap(BuildContext context, Workout workout) {

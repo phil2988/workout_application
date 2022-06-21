@@ -6,12 +6,12 @@ class ExerciseDetails extends StatelessWidget {
     Key? key,
     required this.title, 
     required this.description, 
-    required this.gifLocation
+    required this.imageUrl
     }) : super(key: key);
 
   final String title;
   final String description;
-  final String gifLocation;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +32,33 @@ class ExerciseDetails extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Text(
-                            "Description",
-                            style: subTitleStyle,
-                          ),
-                        )),
+                      width: double.infinity,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Text(
+                          "Description",
+                          style: subTitleStyle,
+                        ),
+                      )
+                    ),
                     SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          child: Text(
-                            description,
-                            style: contentStyle,
-                          ),
-                        )),
-                    // Image.asset("assets/workout_gifs/" + gifLocation[0])
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        child: Text(
+                          description,
+                          style: contentStyle,
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: double.infinity,
+                      child: Text("Muscle Groups", style: subTitleStyle,)
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      // TODO: Rewrite temp code
+                      child: Image.network(storrageAccountUrl + "images/" + imageUrl == "" ? "big-guns.jpg" : "") ,
+                    )
                   ],
                 ))));
   }
