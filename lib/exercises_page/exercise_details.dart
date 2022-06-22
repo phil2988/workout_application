@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
+import '../general_functions/utility.dart';
+
 class ExerciseDetails extends StatelessWidget {
   const ExerciseDetails({
     Key? key,
@@ -56,8 +58,7 @@ class ExerciseDetails extends StatelessWidget {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      // TODO: Rewrite temp code
-                      child: Image.network(storrageAccountUrl + "images/" + (imageUrl == "" ? "big-guns.jpg" : imageUrl)) ,
+                      child: Image.network(getImageUrl(exerciseUrl: imageUrl)) ,
                     )
                   ],
                 ))));

@@ -7,6 +7,7 @@ import 'package:workout_application/models/exercise_data.dart';
 import 'package:workout_application/start_workout/small_number_input.dart';
 
 import '../general_functions/backend_submits.dart';
+import '../general_functions/utility.dart';
 
 class WorkoutExerciseForm extends StatefulWidget {
   const WorkoutExerciseForm({
@@ -121,7 +122,9 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
               buttonHeight: 50,
               buttonWidth: 180,
             )
-          )
+          ),
+          Image.network(getImageUrl(exerciseUrl: widget.exercises[currentExercise].images)) ,
+          
         ],
       )
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/start_workout/workout_exercise_form.dart';
 
 import '../app_configs.dart';
+import '../general_functions/utility.dart';
 import '../models/workout.dart';
 
 class ActiveWorkoutPage extends StatelessWidget {
