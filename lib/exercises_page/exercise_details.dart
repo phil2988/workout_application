@@ -57,7 +57,7 @@ class ExerciseDetails extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       // TODO: Rewrite temp code
-                      child: Image.network(storrageAccountUrl + "images/" + imageUrl == "" ? "big-guns.jpg" : "") ,
+                      child: Image.network(storrageAccountUrl + "images/" + (imageUrl == "" ? "big-guns.jpg" : imageUrl)) ,
                     )
                   ],
                 ))));

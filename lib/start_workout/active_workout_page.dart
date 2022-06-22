@@ -21,12 +21,14 @@ class ActiveWorkoutPage extends StatelessWidget {
           backgroundColor: background,
           title: Text(workout.title, style: subTitleStyle),
           centerTitle: true),
-      body: Column(
-        children: [
-          WorkoutExerciseForm(
-              exercises: workout.exercises.exercises,
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            WorkoutExerciseForm(
+                exercises: workout.exercises.exercises,
+            ),
+          ],
+        ),
       )
     );
   }
