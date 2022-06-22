@@ -60,7 +60,6 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     Future onSubmit() async {
@@ -77,6 +76,9 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
           } else {
             currentExercise++;
           }
+          repsController.clear();
+          setsController.clear();
+          weightController.clear();
         });
       }
     }

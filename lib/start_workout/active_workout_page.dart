@@ -11,7 +11,6 @@ class ActiveWorkoutPage extends StatelessWidget {
   }) : super(key: key);
  
   final Workout workout;
-  final int currentExercise = 0;
 
   @override
   Widget build(BuildContext context) {
