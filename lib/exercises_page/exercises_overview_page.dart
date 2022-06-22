@@ -111,8 +111,7 @@ class ExercisesOverview extends StatelessWidget {
     List<Exercise> exercises = [];
 
     for (var exercise in models) {
-      // ignore: iterable_contains_unrelated_type
-      if (!exercises.contains(category)) {
+      if (exercise.category == category) {
         exercises.add(exercise);
       }
     }
