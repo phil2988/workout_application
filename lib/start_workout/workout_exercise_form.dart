@@ -125,8 +125,10 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
               buttonWidth: 180,
             )
           ),
-          Image.network(getImageUrl(exerciseUrl: widget.exercises[currentExercise].images)) ,
-          
+          Padding(
+            padding: defaultPadding, 
+            child: Image.network(getImageUrl(exerciseUrl: widget.exercises[currentExercise].images)) 
+          ,)
         ],
       )
     );
