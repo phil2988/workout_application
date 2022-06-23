@@ -16,6 +16,8 @@ dependencies:
   json_annotation: ^4.1.0
   http: ^0.13.4
   event: ^2.1.2
+  expandable: ^5.0.1
+  accordion: ^2.4.0
 
 dev_dependencies:
   flutter_test:

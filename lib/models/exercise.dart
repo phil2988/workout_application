@@ -4,7 +4,8 @@ class Exercise {
     required this.title,
     required this.description,
     required this.category,
-    required this.images
+    required this.images,
+    required this.parentExercise,
   });
 
   final String? id;
@@ -12,6 +13,7 @@ class Exercise {
   final String description;
   final String images;
   final String category;
+  final String parentExercise;
 
   factory Exercise.fromJson(Map<String, dynamic> parsedJson) {
     return (
@@ -21,6 +23,7 @@ class Exercise {
         description: parsedJson["description"],
         images: parsedJson["images"],
         category: parsedJson["category"],
+        parentExercise: parsedJson["parentExercise"],
       )
     );
   }
@@ -30,6 +33,7 @@ class Exercise {
     "title": title,
     "description": description,
     "category": category,
-    "images": images 
+    "images": images,
+    "parentExercise": parentExercise,
   };
 }

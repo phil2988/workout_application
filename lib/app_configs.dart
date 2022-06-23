@@ -14,6 +14,8 @@ const TextStyle titleStyle =
     TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
 const TextStyle subTitleStyle = TextStyle(fontSize: 30, color: Colors.white);
 const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
+const TextStyle accordionContentStyle = TextStyle(fontSize: 20, color: Colors.black);
+
 
 const TextStyle inputNumberStyle = TextStyle(
   color: Colors.white,
