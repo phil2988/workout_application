@@ -3,6 +3,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 
+import '../general_functions/get_appbar_functions.dart';
 import '../general_functions/utility.dart';
 
 class ExerciseDetails extends StatelessWidget {
@@ -21,8 +22,7 @@ class ExerciseDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: background,
-        appBar:
-            AppBar(backgroundColor: background, title: const Text("Go Back")),
+        appBar: getGoBackAppBar(),
         body: SingleChildScrollView(
             child: Padding(
                 padding: defaultPadding,

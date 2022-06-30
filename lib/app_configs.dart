@@ -10,9 +10,9 @@ const Color navBarUnSelected = Color.fromARGB(255, 255, 255, 255);
 
 // TextStyles
 const TextStyle buttonStyle = TextStyle(fontSize: 18, color: Colors.white);
-const TextStyle titleStyle =
-    TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
+const TextStyle titleStyle = TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
 const TextStyle subTitleStyle = TextStyle(fontSize: 30, color: Colors.white);
+const TextStyle subTitleStyleError = TextStyle(fontSize: 30, color: Colors.red);
 const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
 const TextStyle accordionContentStyle = TextStyle(fontSize: 20, color: Colors.black);
 
