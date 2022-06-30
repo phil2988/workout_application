@@ -1,13 +1,15 @@
-import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
+import 'package:workout_application/general_functions/backend_fetches.dart';
+import 'package:workout_application/general_functions/on_tap_functions.dart';
+import 'package:workout_application/models/exercise.dart';
 
 import '../general_functions/get_appbar_functions.dart';
 import '../general_functions/utility.dart';
 
 class ExerciseDetails extends StatelessWidget {
-  const ExerciseDetails({
+  ExerciseDetails({
     Key? key,
     required this.title, 
     required this.description, 
@@ -18,50 +20,106 @@ class ExerciseDetails extends StatelessWidget {
   final String description;
   final String imageUrl;
 
+  late Future getExerciseVariationsFuture = getExerciseVariations();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: background,
-        appBar: getGoBackAppBar(),
-        body: SingleChildScrollView(
-            child: Padding(
-                padding: defaultPadding,
-                child: Column(
-                  children: [
-                    getTitleAndDescription(title, description),
-                    getMuscleGroupSection(imageUrl),
-                    getVariationsSection(),
-                  ],
-                ))));
-  }
-  
+
   getVariationsSection() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: SizedBox(
-        width: double.infinity,
-        child: ExpandablePanel(
-          theme: const ExpandableThemeData(
-              iconColor: Colors.white 
-          ),
-          header: const Text(
-            "Exercise Variations", 
-            style: subTitleStyle),
-          collapsed: Container(), 
-          expanded:ScrollOnExpand(
-            child: Accordion(
-            headerBackgroundColor: primary,
-            maxOpenSections: 1,
-            children: [
-              getVariationAccordionSection("Incline Benchpress", "Raise the bench to an incline to get a better focus on the upper chest"),
-              getVariationAccordionSection("Decline Benchpress", "Lower the bench to a decline to get a better focus on the lower chest"),
-              getVariationAccordionSection("Flat Benchpress", "Lay flat on the ground with flared elbows to focus the triceps")
-            ]
-          ), 
-          ) 
-        )
-      ),
+    return FutureBuilder(
+      future: getExerciseVariationsFuture,  
+      builder: (context, AsyncSnapshot snapshot){
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return Container(
+              child: const Text(
+                "Error! No Connection!",
+                style: subTitleStyle,
+              ),
+              alignment: Alignment.topCenter,
+              color: background,
+            );
+          case ConnectionState.waiting:
+            return Container(
+              child: const Text(
+                "Loading...",
+                style: subTitleStyle,
+              ),
+              alignment: Alignment.topCenter,
+              color: background,
+            );
+          default:
+            if (snapshot.hasError) {
+              return Center(child: Text("Error: ${snapshot.error}"));
+            } 
+          else {
+            List<Widget> variationLinks = [];
+            variationLinks.add(const Divider(color: Colors.white, thickness: 1));
+            for (Exercise exercise in snapshot.data) {
+              variationLinks.add(
+                GestureDetector(
+                  child: SizedBox(width: double.infinity, child: Text(exercise.title, style: contentStyle,)),
+                  onTap: exerciseAppButtonOnTap(context, exercise),
+                )
+              );
+              variationLinks.add(const Divider(color: Colors.white, thickness: 1));
+            }
+            if(variationLinks.length == 1){
+              variationLinks.add(const Text("No variations found for this exercise", style: contentStyle,));
+            }
+            return Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: SizedBox(
+                width: double.infinity,
+                child: ExpandablePanel(
+                  theme: const ExpandableThemeData(
+                      iconColor: Colors.white 
+                  ),
+                  header: const Text(
+                    "Exercise Variations", 
+                    style: subTitleStyle),
+                  collapsed: Container(), 
+                  expanded:ScrollOnExpand(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: variationLinks
+                    ), 
+                  ) 
+                )
+              ),
+            );
+          }
+        }
+      },
     );
+  }
+
+  return Scaffold(
+      backgroundColor: background,
+      appBar: getGoBackAppBar(),
+      body: SingleChildScrollView(
+          child: Padding(
+              padding: defaultPadding,
+              child: Column(
+                children: [
+                  getTitleAndDescription(title, description),
+                  getMuscleGroupSection(imageUrl),
+                  getVariationsSection(),
+                  const SizedBox(height: 15)
+                ],
+              ))));
+  }
+
+  Future getExerciseVariations() async{
+    List<Exercise> variations = [];
+    final exercises = await getExercises();
+
+    for (var exercise in exercises) {
+      if(exercise.parentExercise.contains(title)){
+        variations.add(exercise);
+      }
+    }
+    return variations;
   }
   
   getTitleAndDescription(String title, String description){
@@ -113,20 +171,6 @@ class ExerciseDetails extends StatelessWidget {
           child: Image.network(getImageUrl(exerciseUrl: url)) ,
         )
       ],
-    );
-  }
-
-  getVariationAccordionSection(String title, String description){
-    return AccordionSection(
-      header: Text(
-        title, 
-        style: subTitleStyle
-        ),
-      content: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              description, 
-              style: accordionContentStyle)) 
     );
   }
 

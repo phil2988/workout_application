@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
         padding: buttonPadding,
         child: ElevatedButton(
             onPressed: loading || disabled? null: onPressed,
-            child: loading? const CircularProgressIndicator() : Text(buttonText, style: contentStyle),
+            child: loading? const CircularProgressIndicator() : Text(buttonText, style: contentStyle, ),
             style: ElevatedButton.styleFrom(
                 textStyle: textStyle,
                 fixedSize: Size(buttonWidth, buttonHeight),
