@@ -9,12 +9,12 @@ import '../general_functions/get_appbar_functions.dart';
 import '../general_functions/utility.dart';
 
 class ExerciseDetails extends StatelessWidget {
-  ExerciseDetails({
-    Key? key,
-    required this.title, 
-    required this.description, 
-    required this.imageUrl
-    }) : super(key: key);
+  ExerciseDetails(
+      {Key? key,
+      required this.title,
+      required this.description,
+      required this.imageUrl})
+      : super(key: key);
 
   final String title;
   final String description;
@@ -24,154 +24,154 @@ class ExerciseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-  getVariationsSection() {
-    return FutureBuilder(
-      future: getExerciseVariationsFuture,  
-      builder: (context, AsyncSnapshot snapshot){
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return Container(
-              child: const Text(
-                "Error! No Connection!",
-                style: subTitleStyle,
-              ),
-              alignment: Alignment.topCenter,
-              color: background,
-            );
-          case ConnectionState.waiting:
-            return Container(
-              child: const Text(
-                "Loading...",
-                style: subTitleStyle,
-              ),
-              alignment: Alignment.topCenter,
-              color: background,
-            );
-          default:
-            if (snapshot.hasError) {
-              return Center(child: Text("Error: ${snapshot.error}"));
-            } 
-          else {
-            List<Widget> variationLinks = [];
-            variationLinks.add(const Divider(color: Colors.white, thickness: 1));
-            for (Exercise exercise in snapshot.data) {
-              variationLinks.add(
-                GestureDetector(
-                  child: SizedBox(width: double.infinity, child: Text(exercise.title, style: contentStyle,)),
-                  onTap: exerciseAppButtonOnTap(context, exercise),
-                )
+    getVariationsSection() {
+      return FutureBuilder(
+        future: getExerciseVariationsFuture,
+        builder: (context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return Container(
+                child: const Text(
+                  "Error! No Connection!",
+                  style: subTitleStyle,
+                ),
+                alignment: Alignment.topCenter,
+                color: background,
               );
-              variationLinks.add(const Divider(color: Colors.white, thickness: 1));
-            }
-            if(variationLinks.length == 1){
-              variationLinks.add(const Text("No variations found for this exercise", style: contentStyle,));
-            }
-            return Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: SizedBox(
-                width: double.infinity,
-                child: ExpandablePanel(
-                  theme: const ExpandableThemeData(
-                      iconColor: Colors.white 
-                  ),
-                  header: const Text(
-                    "Exercise Variations", 
-                    style: subTitleStyle),
-                  collapsed: Container(), 
-                  expanded:ScrollOnExpand(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: variationLinks
-                    ), 
-                  ) 
-                )
-              ),
-            );
+            case ConnectionState.waiting:
+              return Container(
+                child: const Text(
+                  "Loading...",
+                  style: subTitleStyle,
+                ),
+                alignment: Alignment.topCenter,
+                color: background,
+              );
+            default:
+              if (snapshot.hasError) {
+                return Center(child: Text("Error: ${snapshot.error}"));
+              } else {
+                List<Widget> variationLinks = [];
+                variationLinks
+                    .add(const Divider(color: Colors.white, thickness: 1));
+                for (Exercise exercise in snapshot.data) {
+                  variationLinks.add(GestureDetector(
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          exercise.title,
+                          style: contentStyle,
+                        )),
+                    onTap: exerciseAppButtonOnTap(context, exercise),
+                  ));
+                  variationLinks
+                      .add(const Divider(color: Colors.white, thickness: 1));
+                }
+                if (variationLinks.length == 1) {
+                  variationLinks.add(const Text(
+                    "No variations found for this exercise",
+                    style: contentStyle,
+                  ));
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: SizedBox(
+                      width: double.infinity,
+                      child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                              iconColor: Colors.white),
+                          header: const Text("Exercise Variations",
+                              style: subTitleStyle),
+                          collapsed: Container(),
+                          expanded: ScrollOnExpand(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: variationLinks),
+                          ))),
+                );
+              }
           }
-        }
-      },
-    );
+        },
+      );
+    }
+
+    return Scaffold(
+        backgroundColor: background,
+        appBar: getGoBackAppBar(),
+        body: SingleChildScrollView(
+            child: Padding(
+                padding: defaultPadding,
+                child: Column(
+                  children: [
+                    getTitleAndDescription(title, description),
+                    getMuscleGroupSection(imageUrl),
+                    getVariationsSection(),
+                    const SizedBox(height: 15)
+                  ],
+                ))));
   }
 
-  return Scaffold(
-      backgroundColor: background,
-      appBar: getGoBackAppBar(),
-      body: SingleChildScrollView(
-          child: Padding(
-              padding: defaultPadding,
-              child: Column(
-                children: [
-                  getTitleAndDescription(title, description),
-                  getMuscleGroupSection(imageUrl),
-                  getVariationsSection(),
-                  const SizedBox(height: 15)
-                ],
-              ))));
-  }
-
-  Future getExerciseVariations() async{
+  Future getExerciseVariations() async {
     List<Exercise> variations = [];
     final exercises = await getExercises();
 
     for (var exercise in exercises) {
-      if(exercise.parentExercise.contains(title)){
+      if (exercise.parentExercise.contains(title)) {
         variations.add(exercise);
       }
     }
     return variations;
   }
-  
-  getTitleAndDescription(String title, String description){
-    return 
-        Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                title,
-                style: titleStyle,
-              ),
-            ),
-            const SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Text(
-                  "Description",
-                  style: subTitleStyle,
-                ),
-              )
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Text(
-                  description,
-                  style: contentStyle,
-                ),
-              )
-            ),
-          ],
-    );
-  }
 
-  getMuscleGroupSection(String url){
+  getTitleAndDescription(String title, String description) {
     return Column(
       children: [
-          const SizedBox(width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Text("Muscle Groups", style: subTitleStyle,),
-          )
-        ),
         SizedBox(
           width: double.infinity,
-          child: Image.network(getImageUrl(exerciseUrl: url)) ,
-        )
+          child: Text(
+            title,
+            style: titleStyle,
+          ),
+        ),
+        const SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Description",
+                style: subTitleStyle,
+              ),
+            )),
+        SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Text(
+                description,
+                style: contentStyle,
+              ),
+            )),
       ],
     );
   }
 
+  getMuscleGroupSection(String url) {
+    return Column(
+      children: [
+        const SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Muscle Groups",
+                style: subTitleStyle,
+              ),
+            )),
+        SizedBox(
+          width: double.infinity,
+          child: Image.network(getImageUrl(exerciseUrl: url)),
+        )
+      ],
+    );
+  }
 }
