@@ -10,12 +10,13 @@ const Color navBarUnSelected = Color.fromARGB(255, 255, 255, 255);
 
 // TextStyles
 const TextStyle buttonStyle = TextStyle(fontSize: 18, color: Colors.white);
-const TextStyle titleStyle = TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
+const TextStyle titleStyle =
+    TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
 const TextStyle subTitleStyle = TextStyle(fontSize: 30, color: Colors.white);
 const TextStyle subTitleStyleError = TextStyle(fontSize: 30, color: Colors.red);
 const TextStyle contentStyle = TextStyle(fontSize: 20, color: Colors.white);
-const TextStyle accordionContentStyle = TextStyle(fontSize: 20, color: Colors.black);
-
+const TextStyle accordionContentStyle =
+    TextStyle(fontSize: 20, color: Colors.black);
 
 const TextStyle inputNumberStyle = TextStyle(
   color: Colors.white,
@@ -34,4 +35,5 @@ const titlePadding = EdgeInsets.fromLTRB(0, 20, 0, 10);
 
 // External links
 const String apiUrl = "https://workout-application-backend.herokuapp.com/api/";
-const String storrageAccountUrl = "https://workoutstorage.blob.core.windows.net/";
+const String storrageAccountUrl =
+    "https://workoutstorage.blob.core.windows.net/";
