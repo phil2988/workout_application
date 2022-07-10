@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:workout_application/general-components/app_card.dart';
+import 'package:workout_application/general_functions/get_appbar_functions.dart';
+import 'package:workout_application/theme/app_themes.dart';
 import '../app_configs.dart';
 import '../general_functions/on_tap_functions.dart';
 import '../models/workout.dart';
@@ -11,12 +13,10 @@ class WorkoutsOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeHandler().getTheme();
     return Scaffold(
-        backgroundColor: background,
-        appBar: AppBar(
-            backgroundColor: background,
-            title: const Text("Workouts Overview", style: titleStyle),
-            centerTitle: true),
+        backgroundColor: theme.colorScheme.background,
+        appBar: getWorkoutsOverviewAppBar(),
         body: FutureBuilder(
             future: getWorkouts(),
             builder: (context, AsyncSnapshot<List<Workout>> workouts) {
@@ -24,21 +24,21 @@ class WorkoutsOverview extends StatelessWidget {
               switch (workouts.connectionState) {
                 case ConnectionState.none:
                   return Container(
-                    child: const Text(
+                    child: Text(
                       "Error! No Connection!",
-                      style: subTitleStyle,
+                      style: theme.textTheme.subtitle1,
                     ),
                     alignment: Alignment.topCenter,
-                    color: background,
+                    color: theme.colorScheme.background,
                   );
                 case ConnectionState.waiting:
                   return Container(
-                    child: const Text(
+                    child: Text(
                       "Loading...",
-                      style: subTitleStyle,
+                      style: theme.textTheme.subtitle1,
                     ),
                     alignment: Alignment.topCenter,
-                    color: background,
+                    color: theme.colorScheme.background,
                   );
                 default:
                   if (workouts.hasError) {
@@ -47,22 +47,22 @@ class WorkoutsOverview extends StatelessWidget {
                     List<AppCard> cards = [];
 
                     for (var item in workouts.data as List<Workout>) {
-                      cards.add(
-                        AppCard(
-                          title: item.title, 
+                      cards.add(AppCard(
+                          title: item.title,
                           description: item.description,
-                          onPressed: workoutCardOnTap(context, item)
-                        )
-                      );
+                          onPressed: workoutCardOnTap(context, item)));
                     }
 
                     return FractionallySizedBox(
                         widthFactor: 1,
                         heightFactor: 1,
                         child: SingleChildScrollView(
-                            child: Container(
-                          alignment: Alignment.topCenter,
-                          child: Column(children: cards),
+                            child: Padding(
+                          padding: titlePadding,
+                          child: Container(
+                            alignment: Alignment.topCenter,
+                            child: Column(children: cards),
+                          ),
                         )));
                   }
               }

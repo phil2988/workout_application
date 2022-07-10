@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/general-components/app_button.dart';
+import 'package:workout_application/theme/app_themes.dart';
 import '../app_configs.dart';
 import '../general_functions/on_tap_functions.dart';
 import '../models/exercise.dart';
@@ -10,9 +11,9 @@ class ExercisesCategoryOverview extends StatelessWidget {
 
   const ExercisesCategoryOverview({
     Key? key,
-    required this.category, 
+    required this.category,
     required this.exercises,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class ExercisesCategoryOverview extends StatelessWidget {
   }
 
   Widget getChildren(BuildContext context) {
+    final theme = ThemeHandler().getTheme();
     List<AppButton> column1 = [];
     List<AppButton> column2 = [];
 
@@ -27,18 +29,20 @@ class ExercisesCategoryOverview extends StatelessWidget {
     for (Exercise exercise in exercises) {
       if (index == 0) {
         column1.add(AppButton(
-           buttonText: exercise.title, onPressed: exerciseAppButtonOnTap(context, exercise)));
+            buttonText: exercise.title,
+            onPressed: exerciseAppButtonOnTap(context, exercise)));
         index++;
       } else {
         column2.add(AppButton(
-           buttonText: exercise.title, onPressed: exerciseAppButtonOnTap(context, exercise)));
+            buttonText: exercise.title,
+            onPressed: exerciseAppButtonOnTap(context, exercise)));
         index = 0;
       }
     }
 
     var categoryText = Text(
       category,
-      style: subTitleStyle,
+      style: theme.textTheme.subtitle1,
     );
 
     var exerciseColumns = Row(

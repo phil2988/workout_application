@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
+import 'package:workout_application/theme/app_themes.dart';
 
 class AppButton extends StatelessWidget {
   final void Function() onPressed;
@@ -7,7 +8,6 @@ class AppButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
   final OutlinedBorder shape;
-  final TextStyle textStyle;
   final bool loading;
   final bool disabled;
 
@@ -17,24 +17,31 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.disabled = false,
     this.loading = false,
-    this.textStyle = buttonStyle,
     this.buttonWidth = 180,
     this.buttonHeight = 65,
-    this.shape = const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
+    this.shape =
+        const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeHandler().getTheme();
     return Padding(
         padding: buttonPadding,
         child: ElevatedButton(
-            onPressed: loading || disabled? null: onPressed,
-            child: loading? const CircularProgressIndicator() : Text(buttonText, style: contentStyle, ),
+            onPressed: loading || disabled ? null : onPressed,
+            child: loading
+                ? const CircularProgressIndicator()
+                : Text(
+                    buttonText,
+                    style: theme.textTheme.button,
+                    textAlign: TextAlign.center,
+                  ),
             style: ElevatedButton.styleFrom(
-                textStyle: textStyle,
+                textStyle: theme.textTheme.button,
                 fixedSize: Size(buttonWidth, buttonHeight),
-                primary: primary,
-                onPrimary: Colors.white,
+                primary: theme.colorScheme.primary,
+                onPrimary: theme.colorScheme.onPrimary,
                 shape: shape)));
   }
 }
