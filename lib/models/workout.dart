@@ -1,11 +1,10 @@
 import 'package:workout_application/models/list_of_exercises.dart';
 
 class Workout {
-  Workout({
-    required this.title,
-    required this.description,
-    required this.exercises
-  });
+  Workout(
+      {this.title = "",
+      this.description = "",
+      this.exercises = const ExercisesList()});
 
   final String title;
   final String description;

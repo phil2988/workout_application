@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/exercises_page/add_exercise_form.dart';
 
 import '../general_functions/get_appbar_functions.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
+import 'package:workout_application/general_functions/futurebuilder_builder.dart';
 
 import '../general_functions/backend_fetches.dart';
 import '../general_functions/get_appbar_functions.dart';
@@ -25,56 +26,35 @@ class ExercisesOverviewState extends State<ExercisesOverview> {
         body: FutureBuilder(
             future: getExercises(),
             builder: (context, AsyncSnapshot<List<Exercise>> exercises) {
-              switch (exercises.connectionState) {
-                case ConnectionState.none:
-                  return Container(
-                    child: Text(
-                      "Error! No Connection!",
-                      style: theme.textTheme.subtitle1,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: theme.colorScheme.background,
-                  );
-                case ConnectionState.waiting:
-                  return Container(
-                    child: Text(
-                      "Loading...",
-                      style: theme.textTheme.subtitle1,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: theme.colorScheme.background,
-                  );
-                default:
-                  if (exercises.hasError) {
-                    return Center(child: Text("Error: ${exercises.error}"));
-                  } else {
-                    final exercisesData = exercises.data as List<Exercise>;
-                    final categories =
-                        getUniqueCategoriesWithExercises(exercisesData);
-                    List<Widget> finalList = [];
+              List<Widget> finalList = [];
+              if (exercises.hasData) {
+                final exercisesData = exercises.data as List<Exercise>;
+                final categories =
+                    getUniqueCategoriesWithExercises(exercisesData);
 
-                    for (var category in categories) {
-                      List<Exercise> exercisesInCategory =
-                          getExercisesWithCategory(category, exercisesData);
-                      finalList.add(ExercisesCategoryOverview(
-                          category: category, exercises: exercisesInCategory));
-                    }
-
-                    return FractionallySizedBox(
-                        widthFactor: 1,
-                        heightFactor: 1,
-                        child: Container(
-                            color: theme.colorScheme.background,
-                            alignment: Alignment.center,
-                            child: SingleChildScrollView(
-                                child: Padding(
-                              padding: titlePadding,
-                              child: Column(
-                                children: finalList,
-                              ),
-                            ))));
-                  }
+                for (var category in categories) {
+                  List<Exercise> exercisesInCategory =
+                      getExercisesWithCategory(category, exercisesData);
+                  finalList.add(ExercisesCategoryOverview(
+                      category: category, exercises: exercisesInCategory));
+                }
               }
+
+              return getFutureBuilderErrorHandling(
+                  snapshot: exercises,
+                  returnWidget: FractionallySizedBox(
+                      widthFactor: 1,
+                      heightFactor: 1,
+                      child: Container(
+                          color: theme.colorScheme.background,
+                          alignment: Alignment.center,
+                          child: SingleChildScrollView(
+                              child: Padding(
+                            padding: titlePadding,
+                            child: Column(
+                              children: finalList,
+                            ),
+                          )))));
             }));
   }
 

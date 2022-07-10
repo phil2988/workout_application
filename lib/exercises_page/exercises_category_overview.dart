@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/general-components/app_button.dart';
 import 'package:workout_application/theme/app_themes.dart';
-import '../app_configs.dart';
+
 import '../general_functions/on_tap_functions.dart';
 import '../models/exercise.dart';
 

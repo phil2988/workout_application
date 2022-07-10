@@ -7,6 +7,7 @@ import 'package:workout_application/general_functions/backend_submits.dart';
 import 'package:workout_application/theme/app_themes.dart';
 
 import '../general_functions/backend_fetches.dart';
+import '../general_functions/futurebuilder_builder.dart';
 import '../general_functions/utility.dart';
 import '../models/exercise.dart';
 
@@ -74,56 +75,33 @@ class AddExerciseFormState extends State<AddExerciseForm> {
     return FutureBuilder(
         future: categoriesDropDownFuture,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return Container(
-                child: Text(
-                  "Error! No Connection!",
-                  style: theme.textTheme.subtitle1,
-                ),
-                alignment: Alignment.topCenter,
-                color: theme.colorScheme.background,
-              );
-            case ConnectionState.waiting:
-              return Container(
-                child: Text(
-                  "Loading...",
-                  style: theme.textTheme.subtitle1,
-                ),
-                alignment: Alignment.topCenter,
-                color: theme.colorScheme.background,
-              );
-            default:
-              if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
-              } else {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                            width: width * 0.3,
-                            child: Text(
-                              "Category",
-                              style: categoryError
-                                  ? theme.textTheme.headline5
-                                  : theme.textTheme.headline6,
-                            )),
-                        SizedBox(
-                          child: snapshot.data,
-                          width: width * 0.7,
-                        ),
-                      ],
-                    ),
-                    Divider(
-                        color: categoryError
-                            ? Theme.of(context).colorScheme.error
-                            : Theme.of(context).colorScheme.surface,
-                        thickness: 1),
-                  ],
-                );
-              }
-          }
+          return getFutureBuilderErrorHandling(
+              snapshot: snapshot,
+              returnWidget: Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                          width: width * 0.3,
+                          child: Text(
+                            "Category",
+                            style: categoryError
+                                ? theme.textTheme.headline5
+                                : theme.textTheme.headline6,
+                          )),
+                      SizedBox(
+                        child: snapshot.data,
+                        width: width * 0.7,
+                      ),
+                    ],
+                  ),
+                  Divider(
+                      color: categoryError
+                          ? Theme.of(context).colorScheme.error
+                          : Theme.of(context).colorScheme.surface,
+                      thickness: 1),
+                ],
+              ));
         });
   }
 

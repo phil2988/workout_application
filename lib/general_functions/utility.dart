@@ -1,8 +1,10 @@
 import '../app_configs.dart';
 import '../models/exercise.dart';
 
-String getImageUrl({String exerciseUrl = ""}){
-  return storrageAccountUrl + "images/" + (exerciseUrl == "" ? "big-guns.jpg" : exerciseUrl);
+String getImageUrl({String exerciseUrl = ""}) {
+  return storrageAccountUrl +
+      "images/" +
+      (exerciseUrl == "" ? "big-guns.jpg" : exerciseUrl);
 }
 
 List<String> getUniqueCategoriesWithExercises(List<Exercise> exercises) {
@@ -14,10 +16,15 @@ List<String> getUniqueCategoriesWithExercises(List<Exercise> exercises) {
     }
   }
 
+  uniques.sort((a, b) {
+    return a.compareTo(b);
+  });
+
   return uniques;
 }
 
-List<Exercise> getExercisesWithCategory(String category, List<Exercise> models) {
+List<Exercise> getExercisesWithCategory(
+    String category, List<Exercise> models) {
   List<Exercise> exercises = [];
 
   for (var exercise in models) {

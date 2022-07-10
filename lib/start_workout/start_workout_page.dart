@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/general-components/app_card.dart';
+import 'package:workout_application/general_functions/futurebuilder_builder.dart';
 import 'package:workout_application/theme/app_themes.dart';
 
 import '../general-components/app_button.dart';
@@ -22,55 +23,29 @@ class StartWorkout extends StatelessWidget {
         appBar: getStartWorkoutAppBar(),
         body: FutureBuilder(
             future: getDefaultWorkout(),
-            builder: (context, AsyncSnapshot<Workout> workout) {
-              switch (workout.connectionState) {
-                case ConnectionState.none:
-                  return Container(
-                    child: Text(
-                      "Error! No Connection!",
-                      style: theme.textTheme.subtitle1,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: theme.colorScheme.background,
-                  );
-                case ConnectionState.waiting:
-                  return Container(
-                    child: Text(
-                      "Loading...",
-                      style: theme.textTheme.subtitle1,
-                    ),
-                    alignment: Alignment.topCenter,
-                    color: theme.colorScheme.background,
-                  );
-                default:
-                  if (workout.hasError) {
-                    return Center(
-                        child: Text(
-                      "Error: ${workout.error}",
-                      style: theme.textTheme.subtitle1,
-                    ));
-                  } else {
-                    final workoutdata = workout.data as Workout;
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: titlePadding,
-                          child: Text(
-                            "Default Workout",
-                            style: theme.textTheme.subtitle1,
-                          ),
-                        ),
-                        AppCard(
-                            title: workoutdata.title,
-                            description: workoutdata.description,
-                            onPressed: workoutCardOnTap(context, workoutdata)),
-                        AppButton(
-                            buttonText: "Start Workout",
-                            onPressed: startWorkoutOnTap(context, workoutdata))
-                      ],
-                    );
-                  }
+            builder: (context, AsyncSnapshot<Workout> snapshot) {
+              Workout workout = Workout();
+              if (snapshot.hasData) {
+                workout = snapshot.data as Workout;
               }
+              return getFutureBuilderErrorHandling(
+                  snapshot: snapshot,
+                  returnWidget: Column(children: [
+                    Padding(
+                      padding: titlePadding,
+                      child: Text(
+                        "Default Workout",
+                        style: theme.textTheme.subtitle1,
+                      ),
+                    ),
+                    AppCard(
+                        title: workout.title,
+                        description: workout.description,
+                        onPressed: workoutCardOnTap(context, workout)),
+                    AppButton(
+                        buttonText: "Start Workout",
+                        onPressed: startWorkoutOnTap(context, workout))
+                  ]));
             }));
   }
 }
