@@ -73,32 +73,59 @@ class _NavbarState extends State<NavBar> {
 
   @override
   Widget build(context) {
-    getNavbarItems() {
-      List<AppNavbarItem> navbarItems = [];
-      for (var i = 0; i < 5; i++) {
-        navbarItems.add(AppNavbarItem(
-          icon: icons[i],
-          text: text[i],
-          onTapEvent: () => updatePage(i),
-          selected: i == selectedPageIndex,
-        ));
-      }
-      return navbarItems;
-    }
-
+    final theme = ThemeHandler().getTheme();
     return MaterialApp(
         title: "WorkoutApp",
         home: Scaffold(
           body: Center(child: _pages.elementAt(selectedPageIndex)),
           bottomNavigationBar: Container(
-              color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-              child: SizedBox(
-                  height: Theme.of(context).bottomNavigationBarTheme.elevation,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.max,
-                    children: getNavbarItems(),
-                  ))),
+              color: theme.bottomNavigationBarTheme.backgroundColor,
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  getNavbarItems() {
+                    List<Widget> navbarItems = [];
+                    for (var i = 0; i < 5; i++) {
+                      navbarItems.add(SizedBox(
+                        width: selectedPageIndex == i
+                            ? constraints.maxWidth * 0.28
+                            : constraints.maxWidth * 0.18,
+                        child: AppNavbarItem(
+                            icon: icons[i],
+                            text: text[i],
+                            onTapEvent: () => updatePage(i),
+                            selected: i == selectedPageIndex,
+                            unselectedIconSize: i == 2
+                                ? theme.bottomNavigationBarTheme
+                                        .unselectedIconTheme!.size! +
+                                    10
+                                : theme.bottomNavigationBarTheme
+                                    .unselectedIconTheme!.size,
+                            selectedIconSize: i == 2
+                                ? theme.bottomNavigationBarTheme
+                                        .unselectedIconTheme!.size! +
+                                    7
+                                : theme.bottomNavigationBarTheme
+                                    .unselectedIconTheme!.size,
+                            iconPadding: i == 0
+                                ? const EdgeInsets.only(right: 15)
+                                : const EdgeInsets.all(0)),
+                      ));
+                    }
+                    return navbarItems;
+                  }
+
+                  return SizedBox(
+                      height: ThemeHandler()
+                          .getTheme()
+                          .bottomNavigationBarTheme
+                          .elevation,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.max,
+                        children: getNavbarItems(),
+                      ));
+                },
+              )),
         ));
   }
 
@@ -118,6 +145,8 @@ class AppNavbarItem extends StatelessWidget {
     this.itemPadding = defaultPadding,
     this.iconPadding = EdgeInsets.zero,
     Key? key,
+    this.selectedIconSize,
+    this.unselectedIconSize,
   }) : super(key: key);
 
   final IconData icon;
@@ -127,6 +156,9 @@ class AppNavbarItem extends StatelessWidget {
   final VoidCallback onTapEvent;
   final EdgeInsets itemPadding;
   final EdgeInsets iconPadding;
+
+  final double? selectedIconSize;
+  final double? unselectedIconSize;
 
   @override
   build(BuildContext context) {
@@ -142,21 +174,37 @@ class AppNavbarItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(icon,
-                    size: selected
-                        ? theme.bottomNavigationBarTheme.selectedIconTheme!.size
-                        : theme
-                            .bottomNavigationBarTheme.unselectedIconTheme!.size,
-                    color: selected
-                        ? theme
-                            .bottomNavigationBarTheme.selectedIconTheme!.color
-                        : theme.bottomNavigationBarTheme.unselectedIconTheme!
-                            .color),
-                Text(
-                  text,
-                  style: selected
-                      ? theme.bottomNavigationBarTheme.selectedLabelStyle
-                      : theme.bottomNavigationBarTheme.unselectedLabelStyle,
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: iconPadding,
+                    child: Icon(icon,
+                        size: selected
+                            ? selectedIconSize ??
+                                theme.bottomNavigationBarTheme
+                                    .selectedIconTheme!.size
+                            : unselectedIconSize ??
+                                theme.bottomNavigationBarTheme
+                                    .unselectedIconTheme!.size,
+                        color: selected
+                            ? theme.bottomNavigationBarTheme.selectedIconTheme!
+                                .color
+                            : theme.bottomNavigationBarTheme
+                                .unselectedIconTheme!.color),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      text,
+                      style: selected
+                          ? theme.bottomNavigationBarTheme.selectedLabelStyle
+                          : theme.bottomNavigationBarTheme.unselectedLabelStyle,
+                      textAlign: TextAlign.end,
+                    ),
+                  ),
                 )
               ],
             ),
