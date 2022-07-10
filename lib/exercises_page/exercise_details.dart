@@ -4,6 +4,7 @@ import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/general_functions/backend_fetches.dart';
 import 'package:workout_application/general_functions/on_tap_functions.dart';
 import 'package:workout_application/models/exercise.dart';
+import 'package:workout_application/theme/app_themes.dart';
 
 import '../general_functions/get_appbar_functions.dart';
 import '../general_functions/utility.dart';
@@ -24,6 +25,7 @@ class ExerciseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeHandler().getTheme();
     getVariationsSection() {
       return FutureBuilder(
         future: getExerciseVariationsFuture,
@@ -31,21 +33,21 @@ class ExerciseDetails extends StatelessWidget {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return Container(
-                child: const Text(
+                child: Text(
                   "Error! No Connection!",
-                  style: subTitleStyle,
+                  style: theme.textTheme.subtitle1,
                 ),
                 alignment: Alignment.topCenter,
-                color: background,
+                color: theme.colorScheme.background,
               );
             case ConnectionState.waiting:
               return Container(
-                child: const Text(
+                child: Text(
                   "Loading...",
-                  style: subTitleStyle,
+                  style: theme.textTheme.subtitle1,
                 ),
                 alignment: Alignment.topCenter,
-                color: background,
+                color: theme.colorScheme.background,
               );
             default:
               if (snapshot.hasError) {
@@ -60,7 +62,7 @@ class ExerciseDetails extends StatelessWidget {
                         width: double.infinity,
                         child: Text(
                           exercise.title,
-                          style: contentStyle,
+                          style: theme.textTheme.bodyText1,
                         )),
                     onTap: exerciseAppButtonOnTap(context, exercise),
                   ));
@@ -68,9 +70,9 @@ class ExerciseDetails extends StatelessWidget {
                       .add(const Divider(color: Colors.white, thickness: 1));
                 }
                 if (variationLinks.length == 1) {
-                  variationLinks.add(const Text(
+                  variationLinks.add(Text(
                     "No variations found for this exercise",
-                    style: contentStyle,
+                    style: theme.textTheme.bodyText1,
                   ));
                 }
                 return Padding(
@@ -80,8 +82,8 @@ class ExerciseDetails extends StatelessWidget {
                       child: ExpandablePanel(
                           theme: const ExpandableThemeData(
                               iconColor: Colors.white),
-                          header: const Text("Exercise Variations",
-                              style: subTitleStyle),
+                          header: Text("Exercise Variations",
+                              style: theme.textTheme.subtitle1),
                           collapsed: Container(),
                           expanded: ScrollOnExpand(
                             child: Column(
@@ -96,7 +98,7 @@ class ExerciseDetails extends StatelessWidget {
     }
 
     return Scaffold(
-        backgroundColor: background,
+        backgroundColor: theme.colorScheme.background,
         appBar: getGoBackAppBar(),
         body: SingleChildScrollView(
             child: Padding(
@@ -124,22 +126,23 @@ class ExerciseDetails extends StatelessWidget {
   }
 
   getTitleAndDescription(String title, String description) {
+    final theme = ThemeHandler().getTheme();
     return Column(
       children: [
         SizedBox(
           width: double.infinity,
           child: Text(
             title,
-            style: titleStyle,
+            style: theme.textTheme.headline1,
           ),
         ),
-        const SizedBox(
+        SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "Description",
-                style: subTitleStyle,
+                style: theme.textTheme.subtitle1,
               ),
             )),
         SizedBox(
@@ -148,7 +151,7 @@ class ExerciseDetails extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Text(
                 description,
-                style: contentStyle,
+                style: theme.textTheme.bodyText1,
               ),
             )),
       ],
@@ -156,15 +159,16 @@ class ExerciseDetails extends StatelessWidget {
   }
 
   getMuscleGroupSection(String url) {
+    final theme = ThemeHandler().getTheme();
     return Column(
       children: [
-        const SizedBox(
+        SizedBox(
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "Muscle Groups",
-                style: subTitleStyle,
+                style: theme.textTheme.subtitle1,
               ),
             )),
         SizedBox(
