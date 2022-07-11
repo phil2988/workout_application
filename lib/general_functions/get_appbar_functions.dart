@@ -2,31 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/theme/app_themes.dart';
 import 'package:workout_application/workout_icons.dart' as workout_icons;
 
-import '../app_configs.dart';
-
 getExercisesAppBar(VoidCallback onPopFunction) {
   final theme = ThemeHandler().getTheme();
   return AppBar(
       backgroundColor: theme.appBarTheme.backgroundColor,
       title: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-        return Stack(
+        return Row(
           children: [
-            Container(
-                alignment: const Alignment(0, 0),
-                child: Text(
-                  "Exercises Overview",
-                  style: theme.textTheme.headline1,
-                )),
-            Container(
-              alignment: const Alignment(1.08, 0),
-              child: IconButton(
+            SizedBox(
+              width: constraints.maxWidth * 0.1,
+            ),
+            SizedBox(
+              width: constraints.maxWidth * 0.8,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Exercises Overview",
+                      style: theme.textTheme.headline1,
+                    ),
+                  )),
+            ),
+            SizedBox(
+              width: constraints.maxWidth * 0.1,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
                   icon: const Icon(
                     workout_icons.Workout.startWorkoutIcon,
                     size: 30,
                   ),
                   onPressed: onPopFunction,
-                  splashRadius: 25),
+                  splashRadius: 18,
+                ),
+              ),
             )
           ],
         );
@@ -42,12 +54,49 @@ getStartWorkoutAppBar() {
       centerTitle: true);
 }
 
-getWorkoutsOverviewAppBar() {
+getWorkoutsOverviewAppBar(VoidCallback onPopFunction) {
   final theme = ThemeHandler().getTheme();
-  return AppBar(
+    return AppBar(
       backgroundColor: theme.appBarTheme.backgroundColor,
-      title: Text("Workouts Overview", style: theme.textTheme.headline1),
+      title: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return Row(
+          children: [
+            SizedBox(
+              width: constraints.maxWidth * 0.1,
+            ),
+            SizedBox(
+              width: constraints.maxWidth * 0.8,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Workouts Overview",
+                      style: theme.textTheme.headline1,
+                    ),
+                  )),
+            ),
+            SizedBox(
+              width: constraints.maxWidth * 0.1,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(
+                    workout_icons.Workout.startWorkoutIcon,
+                    size: 30,
+                  ),
+                  onPressed: onPopFunction,
+                  splashRadius: 18,
+                ),
+              ),
+            )
+          ],
+        );
+      }),
       centerTitle: true);
+
 }
 
 getGoBackAppBar() {

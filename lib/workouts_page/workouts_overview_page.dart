@@ -17,7 +17,7 @@ class WorkoutsOverview extends StatelessWidget {
     final theme = ThemeHandler().getTheme();
     return Scaffold(
         backgroundColor: theme.colorScheme.background,
-        appBar: getWorkoutsOverviewAppBar(),
+        appBar: getWorkoutsOverviewAppBar((){}),
         body: FutureBuilder(
             future: getWorkouts(),
             builder: (context, AsyncSnapshot<List<Workout>> snapshot) {
