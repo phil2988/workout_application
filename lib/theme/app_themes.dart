@@ -16,15 +16,13 @@ class ThemeHandler with ChangeNotifier {
           onSurface: Colors.white),
       textTheme: const TextTheme(
         headline1: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontFamily: "Staatliches"),
+            fontSize: 40, color: Colors.white, fontFamily: "Staatliches"),
         subtitle1: TextStyle(
             fontSize: 30, color: Colors.white, fontFamily: "Staatliches"),
         subtitle2: TextStyle(
             fontSize: 30, color: Colors.red, fontFamily: "Staatliches"),
-        bodyText1: TextStyle(fontSize: 20, color: Colors.white),
+        bodyText1: TextStyle(
+            fontSize: 20, color: Colors.white, fontWeight: FontWeight.w400),
         bodyText2: TextStyle(fontSize: 20, color: Colors.black),
         headline5: TextStyle(
             fontSize: 28, color: Colors.red, fontFamily: "Staatliches"),
@@ -33,10 +31,7 @@ class ThemeHandler with ChangeNotifier {
         headline4: TextStyle(
             color: Colors.white, fontSize: 25, fontFamily: "Staatliches"),
         button: TextStyle(
-            fontSize: 22,
-            color: Colors.white,
-            fontFamily: "Staatliches",
-            fontWeight: FontWeight.w500),
+            fontSize: 22, color: Colors.white, fontWeight: FontWeight.w300),
       ),
       primaryColor: const Color(0xFF2D3743),
       backgroundColor: const Color(0xFF232922),

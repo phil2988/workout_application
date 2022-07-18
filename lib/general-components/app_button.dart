@@ -21,8 +21,7 @@ class AppButton extends StatelessWidget {
       this.buttonWidth = 180,
       this.buttonHeight = 65,
       this.shape = const StadiumBorder(side: BorderSide(color: Colors.white)),
-      this.buttonPadding =
-          const EdgeInsets.symmetric(vertical: 5, horizontal: 5)})
+      this.buttonPadding = const EdgeInsets.all(5)})
       : super(key: key);
 
   @override

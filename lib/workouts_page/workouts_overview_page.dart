@@ -17,7 +17,7 @@ class WorkoutsOverview extends StatelessWidget {
     final theme = ThemeHandler().getTheme();
     return Scaffold(
         backgroundColor: theme.colorScheme.background,
-        appBar: getWorkoutsOverviewAppBar((){}),
+        appBar: getWorkoutsOverviewAppBar(() {}),
         body: FutureBuilder(
             future: getWorkouts(),
             builder: (context, AsyncSnapshot<List<Workout>> snapshot) {
@@ -25,9 +25,11 @@ class WorkoutsOverview extends StatelessWidget {
               if (snapshot.hasData) {
                 for (var item in snapshot.data as List<Workout>) {
                   cards.add(AppCard(
-                      title: item.title,
-                      description: item.description,
-                      onPressed: workoutCardOnTap(context, item)));
+                    title: item.title,
+                    description: item.description,
+                    onPressed: workoutCardOnTap(context, item),
+                    outerPadding: const EdgeInsets.symmetric(vertical: 20),
+                  ));
                 }
               }
               return getFutureBuilderErrorHandling(

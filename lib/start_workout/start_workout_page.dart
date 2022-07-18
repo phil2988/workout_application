@@ -30,22 +30,25 @@ class StartWorkout extends StatelessWidget {
               }
               return getFutureBuilderErrorHandling(
                   snapshot: snapshot,
-                  returnWidget: Column(children: [
-                    Padding(
-                      padding: titlePadding,
-                      child: Text(
-                        "Default Workout",
-                        style: theme.textTheme.subtitle1,
-                      ),
+                  returnWidget: SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Column(children: [
+                        Text(
+                          "Default Workout",
+                          style: theme.textTheme.subtitle1,
+                        ),
+                        AppCard(
+                            title: workout.title,
+                            description: workout.description,
+                            onPressed: workoutCardOnTap(context, workout)),
+                        AppButton(
+                            buttonText: "Start Workout",
+                            onPressed: startWorkoutOnTap(context, workout))
+                      ]),
                     ),
-                    AppCard(
-                        title: workout.title,
-                        description: workout.description,
-                        onPressed: workoutCardOnTap(context, workout)),
-                    AppButton(
-                        buttonText: "Start Workout",
-                        onPressed: startWorkoutOnTap(context, workout))
-                  ]));
+                  ));
             }));
   }
 }
