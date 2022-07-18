@@ -1,23 +1,39 @@
-import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:workout_application/general-components/app_card.dart';
 import 'package:workout_application/general_functions/futurebuilder_builder.dart';
 import 'package:workout_application/general_functions/get_appbar_functions.dart';
 import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/workouts_page/add_workout_page.dart';
+
 import '../app_configs.dart';
 import '../general_functions/on_tap_functions.dart';
 import '../models/workout.dart';
 
-class WorkoutsOverview extends StatelessWidget {
+class WorkoutsOverview extends StatefulWidget {
   const WorkoutsOverview({Key? key}) : super(key: key);
 
   @override
+  State<WorkoutsOverview> createState() => WorkoutsOverviewState();
+}
+
+class WorkoutsOverviewState extends State<WorkoutsOverview> {
+  @override
   Widget build(BuildContext context) {
+    VoidCallback? onPopFunction() {
+      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddWorkoutPage()))
+          .then((value) => setState(() {}));
+      return null;
+    }
+
     final theme = ThemeHandler().getTheme();
+
     return Scaffold(
         backgroundColor: theme.colorScheme.background,
-        appBar: getWorkoutsOverviewAppBar((){}),
+        appBar: getWorkoutsOverviewAppBar(onPopFunction),
         body: FutureBuilder(
             future: getWorkouts(),
             builder: (context, AsyncSnapshot<List<Workout>> snapshot) {
