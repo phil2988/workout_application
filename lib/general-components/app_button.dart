@@ -10,38 +10,54 @@ class AppButton extends StatelessWidget {
   final OutlinedBorder shape;
   final bool loading;
   final bool disabled;
+  final EdgeInsets buttonPadding;
 
-  const AppButton({
-    Key? key,
-    required this.buttonText,
-    required this.onPressed,
-    this.disabled = false,
-    this.loading = false,
-    this.buttonWidth = 180,
-    this.buttonHeight = 65,
-    this.shape =
-        const StadiumBorder(side: BorderSide(width: 3, color: Colors.white)),
-  }) : super(key: key);
+  const AppButton(
+      {Key? key,
+      required this.buttonText,
+      required this.onPressed,
+      this.disabled = false,
+      this.loading = false,
+      this.buttonWidth = 180,
+      this.buttonHeight = 65,
+      this.shape = const StadiumBorder(side: BorderSide(color: Colors.white)),
+      this.buttonPadding =
+          const EdgeInsets.symmetric(vertical: 5, horizontal: 5)})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = ThemeHandler().getTheme();
+
     return Padding(
         padding: buttonPadding,
-        child: ElevatedButton(
-            onPressed: loading || disabled ? null : onPressed,
-            child: loading
-                ? const CircularProgressIndicator()
-                : Text(
-                    buttonText,
-                    style: theme.textTheme.button,
-                    textAlign: TextAlign.center,
-                  ),
-            style: ElevatedButton.styleFrom(
-                textStyle: theme.textTheme.button,
-                fixedSize: Size(buttonWidth, buttonHeight),
-                primary: theme.colorScheme.primary,
-                onPrimary: theme.colorScheme.onPrimary,
-                shape: shape)));
+        child: Material(
+          color: theme.colorScheme.primary,
+          shape: const StadiumBorder(),
+          child: InkWell(
+            customBorder: shape,
+            onTap: loading || disabled ? null : onPressed,
+            child: Container(
+              decoration: const ShapeDecoration(
+                  shape: StadiumBorder(),
+                  shadows: [
+                    BoxShadow(blurRadius: 5, blurStyle: BlurStyle.outer)
+                  ]),
+              child: SizedBox(
+                  height: buttonHeight,
+                  width: buttonWidth,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: loading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            buttonText,
+                            style: theme.textTheme.button,
+                            textAlign: TextAlign.center,
+                          ),
+                  )),
+            ),
+          ),
+        ));
   }
 }

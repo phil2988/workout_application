@@ -49,11 +49,8 @@ class ExercisesOverviewState extends State<ExercisesOverview> {
                           color: theme.colorScheme.background,
                           alignment: Alignment.center,
                           child: SingleChildScrollView(
-                              child: Padding(
-                            padding: titlePadding,
-                            child: Column(
-                              children: finalList,
-                            ),
+                              child: Column(
+                            children: finalList,
                           )))));
             }));
   }
