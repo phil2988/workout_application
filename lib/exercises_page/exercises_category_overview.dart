@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/general-components/app_button.dart';
 import 'package:workout_application/general-components/subtitle_text.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 import '../general_functions/on_tap_functions.dart';
 import '../models/exercise.dart';
@@ -56,8 +56,11 @@ class ExercisesCategoryOverview extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: SubtitleText(
-              text: category, fontStyle: theme.textTheme.subtitle1!),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 15),
+            child:
+                SubtitleText(text: category, fontStyle: theme.text!.subtitle!),
+          ),
         ),
         exerciseColumns
       ],

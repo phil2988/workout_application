@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/general-components/app_button.dart';
 import 'package:workout_application/general_functions/backend_submits.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 import '../general_functions/backend_fetches.dart';
 import '../general_functions/futurebuilder_builder.dart';
@@ -47,7 +47,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Text(
                   "Add New Exercise",
-                  style: theme.textTheme.headline1,
+                  style: theme.text!.title,
                 ),
                 getTextFormField("title"),
                 getTextFormField("description"),
@@ -86,8 +86,8 @@ class AddExerciseFormState extends State<AddExerciseForm> {
                           child: Text(
                             "Category",
                             style: categoryError
-                                ? theme.textTheme.headline5
-                                : theme.textTheme.headline6,
+                                ? theme.text!.subsubtitle
+                                : theme.text!.subsubtitleError,
                           )),
                       SizedBox(
                         child: snapshot.data,
@@ -97,8 +97,8 @@ class AddExerciseFormState extends State<AddExerciseForm> {
                   ),
                   Divider(
                       color: categoryError
-                          ? Theme.of(context).colorScheme.error
-                          : Theme.of(context).colorScheme.surface,
+                          ? theme.color!.error
+                          : theme.color!.onBackground,
                       thickness: 1),
                 ],
               ));
@@ -114,7 +114,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         filled: true,
-        fillColor: ThemeHandler().getTheme().colorScheme.primary,
+        fillColor: ThemeHandler().getTheme().color!.primary,
         contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -125,9 +125,9 @@ class AddExerciseFormState extends State<AddExerciseForm> {
           fontSize: 0,
         ),
       ),
-      dropdownColor: ThemeHandler().getTheme().colorScheme.primary,
+      dropdownColor: ThemeHandler().getTheme().color!.primary,
       value: categoryDropdownValue,
-      style: theme.textTheme.bodyText1,
+      style: theme.text!.body,
       onChanged: (String? newValue) {
         setState(() {
           categoryDropdownValue = newValue ?? "";
@@ -150,7 +150,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
           value: value,
           child: Text(
             value,
-            style: theme.textTheme.bodyText1,
+            style: theme.text!.body,
           ),
         );
       }).toList(),
@@ -169,19 +169,19 @@ class AddExerciseFormState extends State<AddExerciseForm> {
                 return Container(
                   child: Text(
                     "Error! No Connection!",
-                    style: theme.textTheme.subtitle1,
+                    style: theme.text!.subsubtitle,
                   ),
                   alignment: Alignment.topCenter,
-                  color: theme.colorScheme.background,
+                  color: theme.color!.background,
                 );
               case ConnectionState.waiting:
                 return Container(
                   child: Text(
                     "Loading...",
-                    style: theme.textTheme.subtitle1,
+                    style: theme.text!.subsubtitle,
                   ),
                   alignment: Alignment.topCenter,
-                  color: theme.colorScheme.background,
+                  color: theme.color!.background,
                 );
               default:
                 if (snapshot.hasError) {
@@ -195,8 +195,8 @@ class AddExerciseFormState extends State<AddExerciseForm> {
                               width: width * 0.3,
                               child: Text("Variation",
                                   style: variationError
-                                      ? theme.textTheme.headline5
-                                      : theme.textTheme.headline6)),
+                                      ? theme.text!.subtitle
+                                      : theme.text!.subtitle)),
                           SizedBox(
                             child: snapshot.data,
                             width: width * 0.7,
@@ -205,8 +205,8 @@ class AddExerciseFormState extends State<AddExerciseForm> {
                       ),
                       Divider(
                           color: variationError
-                              ? theme.colorScheme.error
-                              : theme.colorScheme.onBackground,
+                              ? theme.color!.error
+                              : theme.color!.onBackground,
                           thickness: 1),
                     ],
                   );
@@ -234,7 +234,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         filled: true,
-        fillColor: ThemeHandler().getTheme().colorScheme.primary,
+        fillColor: ThemeHandler().getTheme().color!.primary,
         contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -245,9 +245,9 @@ class AddExerciseFormState extends State<AddExerciseForm> {
           fontSize: 0,
         ),
       ),
-      dropdownColor: ThemeHandler().getTheme().colorScheme.primary,
+      dropdownColor: ThemeHandler().getTheme().color!.primary,
       value: variationDropdownValue,
-      style: theme.textTheme.bodyText1,
+      style: theme.text!.body,
       onChanged: (String? newValue) {
         setState(() {
           variationDropdownValue = newValue ?? "";
@@ -268,7 +268,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
       items: parentExercises.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value, style: theme.textTheme.bodyText1),
+          child: Text(value, style: theme.text!.body),
         );
       }).toList(),
     );
@@ -279,7 +279,7 @@ class AddExerciseFormState extends State<AddExerciseForm> {
 
     return TextFormField(
       maxLines: hint.toLowerCase() == "description" ? 5 : 1,
-      style: theme.textTheme.headline4,
+      style: theme.text!.subsubtitle,
       decoration: InputDecoration(
         hintStyle: getErrorOrNormalTextFormField(hint),
         hintText: hint,
@@ -337,8 +337,8 @@ class AddExerciseFormState extends State<AddExerciseForm> {
   getErrorOrNormalTextFormField(String hint) =>
       (hint.toLowerCase() == "title" && titleError) ||
               (hint.toLowerCase() == "description" && descriptionError)
-          ? ThemeHandler().defaultTheme.textTheme.headline5
-          : ThemeHandler().defaultTheme.textTheme.headline6;
+          ? ThemeHandler().defaultTheme.text!.subtitle
+          : ThemeHandler().defaultTheme.text!.subtitleError;
 
   getErrorOrNormalColorFormField(String hint) =>
       (hint.toLowerCase() == "title" && titleError) ||

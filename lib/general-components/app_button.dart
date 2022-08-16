@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/app_configs.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 class AppButton extends StatelessWidget {
   final void Function() onPressed;
@@ -31,17 +31,19 @@ class AppButton extends StatelessWidget {
     return Padding(
         padding: buttonPadding,
         child: Material(
-          color: theme.colorScheme.primary,
+          color: theme.color!.primary,
           shape: const StadiumBorder(),
           child: InkWell(
             customBorder: shape,
             onTap: loading || disabled ? null : onPressed,
             child: Container(
-              decoration: const ShapeDecoration(
-                  shape: StadiumBorder(),
-                  shadows: [
-                    BoxShadow(blurRadius: 5, blurStyle: BlurStyle.outer)
-                  ]),
+              decoration:
+                  const ShapeDecoration(shape: StadiumBorder(), shadows: [
+                BoxShadow(
+                    color: Color.fromARGB(64, 0, 0, 0),
+                    blurRadius: 15,
+                    blurStyle: BlurStyle.outer)
+              ]),
               child: SizedBox(
                   height: buttonHeight,
                   width: buttonWidth,
@@ -51,7 +53,7 @@ class AppButton extends StatelessWidget {
                         ? const CircularProgressIndicator()
                         : Text(
                             buttonText,
-                            style: theme.textTheme.button,
+                            style: theme.text!.button,
                             textAlign: TextAlign.center,
                           ),
                   )),

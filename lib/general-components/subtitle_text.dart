@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SubtitleText extends StatelessWidget {
@@ -10,23 +9,21 @@ class SubtitleText extends StatelessWidget {
 
   @override
   build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            style: fontStyle,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          text,
+          style: fontStyle,
+        ),
+        const Material(
+          color: Colors.white,
+          child: SizedBox(
+            height: 2,
+            width: 50,
           ),
-          const Material(
-            color: Colors.white,
-            child: SizedBox(
-              height: 2,
-              width: 50,
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

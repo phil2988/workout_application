@@ -5,7 +5,7 @@ import 'package:workout_application/general-components/app_button.dart';
 import 'package:workout_application/models/exercise.dart';
 import 'package:workout_application/models/exercise_data.dart';
 import 'package:workout_application/start_workout/small_number_input.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 import '../general_functions/backend_submits.dart';
 import '../general_functions/utility.dart';
@@ -88,10 +88,10 @@ class _WorkoutExerciseFormState extends State<WorkoutExerciseForm> {
         child: Column(
           children: [
             Padding(
-                padding: titlePadding,
+                padding: EdgeInsets.zero,
                 child: Text(
                   widget.exercises[currentExercise].title,
-                  style: theme.textTheme.subtitle1,
+                  style: theme.text!.subtitle,
                 )),
             Padding(
                 padding: defaultPadding,

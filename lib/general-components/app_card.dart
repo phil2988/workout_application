@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:workout_application/theme/app_themes.dart';
-import '../app_configs.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 class AppCard extends StatelessWidget {
   final EdgeInsets outerPadding;
   final EdgeInsets innerPadding;
   final String title;
   final String description;
+  final int displayCharacters;
   final void Function() onPressed;
 
   final Size size;
 
-  const AppCard({
-    Key? key,
-    required this.title,
-    required this.description,
-    required this.onPressed,
-    this.size = const Size(380, 150),
-    this.outerPadding = const EdgeInsets.all(5),
-    this.innerPadding = const EdgeInsets.all(15),
-  }) : super(key: key);
+  const AppCard(
+      {Key? key,
+      required this.title,
+      required this.description,
+      required this.onPressed,
+      this.size = const Size(380, 180),
+      this.outerPadding = const EdgeInsets.all(5),
+      this.innerPadding =
+          const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      this.displayCharacters = 200})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cutDescription = description.length >= 100
-        ? description.substring(0, 100) + "..."
+    final cutDescription = description.length >= displayCharacters
+        ? description.substring(0, displayCharacters) + "..."
         : description;
     final theme = ThemeHandler().getTheme();
     return Padding(
         padding: outerPadding,
         child: Material(
-          color: theme.colorScheme.primary,
+          color: theme.color!.primary,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           child: InkWell(
@@ -39,7 +41,10 @@ class AppCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   shadows: const [
-                    BoxShadow(blurRadius: 5, blurStyle: BlurStyle.outer)
+                    BoxShadow(
+                        color: Color.fromARGB(64, 0, 0, 0),
+                        blurRadius: 15,
+                        blurStyle: BlurStyle.outer)
                   ]),
               child: SizedBox(
                 height: size.height,
@@ -53,13 +58,13 @@ class AppCard extends StatelessWidget {
                         children: [
                           Text(
                             title,
-                            style: theme.textTheme.subtitle1,
+                            style: theme.text!.subtitle,
                           ),
                           IconButton(
                             onPressed: onPressed,
                             icon: Icon(
                               Icons.arrow_right_alt_sharp,
-                              color: theme.colorScheme.onPrimary,
+                              color: theme.color!.onPrimary,
                               size: 30,
                             ),
                             splashRadius: 20,
@@ -68,7 +73,7 @@ class AppCard extends StatelessWidget {
                       ),
                       Text(
                         cutDescription,
-                        style: theme.textTheme.bodyText1,
+                        style: theme.text!.body,
                       )
                     ],
                   ),
@@ -92,17 +97,17 @@ class AppCard extends StatelessWidget {
 //                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                   child: Align(
 //                     alignment: Alignment.topLeft,
-//                     child: Text(title, style: theme.textTheme.subtitle1),
+//                     child: Text(title, style: theme.text!.subtitle),
 //                   )),
 //               Align(
 //                   alignment: Alignment.topLeft,
-//                   child: Text(cutDescription, style: theme.textTheme.bodyText1))
+//                   child: Text(cutDescription, style: theme.text!.body))
 //             ],
 //           ),
 //           style: ElevatedButton.styleFrom(
 //               textStyle: theme.textTheme.button,
 //               fixedSize: Size(buttonWidth, buttonHeight),
-//               primary: ThemeHandler().getTheme().colorScheme.primary,
+//               primary: ThemeHandler().getTheme().color!.primary,
 //               onPrimary: Colors.white,
 //               shape: shape),
 //         ));

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Paddings
-const defaultPadding = EdgeInsets.all(10);
-const titlePadding = EdgeInsets.fromLTRB(0, 20, 0, 10);
+const defaultPadding = EdgeInsets.all(20);
 
 // External links
 const String apiUrl = "https://workout-application-backend.herokuapp.com/api/";

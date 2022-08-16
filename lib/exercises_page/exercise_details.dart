@@ -5,7 +5,7 @@ import 'package:workout_application/general_functions/backend_fetches.dart';
 import 'package:workout_application/general_functions/futurebuilder_builder.dart';
 import 'package:workout_application/general_functions/on_tap_functions.dart';
 import 'package:workout_application/models/exercise.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 import '../general_functions/get_appbar_functions.dart';
 import '../general_functions/utility.dart';
@@ -28,7 +28,7 @@ class ExerciseDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ThemeHandler().getTheme();
     return Scaffold(
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.color!.background,
         appBar: getGoBackAppBar(),
         body: SingleChildScrollView(
             child: Padding(
@@ -58,7 +58,7 @@ class ExerciseDetails extends StatelessWidget {
                     width: double.infinity,
                     child: Text(
                       exercise.title,
-                      style: theme.textTheme.bodyText1,
+                      style: theme.text!.body,
                     )),
                 onTap: exerciseAppButtonOnTap(context, exercise),
               ));
@@ -68,7 +68,7 @@ class ExerciseDetails extends StatelessWidget {
             if (variationLinks.length == 1) {
               variationLinks.add(Text(
                 "No variations found for this exercise",
-                style: theme.textTheme.bodyText1,
+                style: theme.text!.body,
               ));
             }
           }
@@ -82,7 +82,7 @@ class ExerciseDetails extends StatelessWidget {
                         theme:
                             const ExpandableThemeData(iconColor: Colors.white),
                         header: Text("Exercise Variations",
-                            style: theme.textTheme.subtitle1),
+                            style: theme.text!.subtitle),
                         collapsed: Container(),
                         expanded: ScrollOnExpand(
                           child: Column(
@@ -113,7 +113,7 @@ class ExerciseDetails extends StatelessWidget {
           width: double.infinity,
           child: Text(
             title,
-            style: theme.textTheme.headline1,
+            style: theme.text!.title,
           ),
         ),
         SizedBox(
@@ -122,7 +122,7 @@ class ExerciseDetails extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "Description",
-                style: theme.textTheme.subtitle1,
+                style: theme.text!.subtitle,
               ),
             )),
         SizedBox(
@@ -131,7 +131,7 @@ class ExerciseDetails extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Text(
                 description,
-                style: theme.textTheme.bodyText1,
+                style: theme.text!.body,
               ),
             )),
       ],
@@ -148,7 +148,7 @@ class ExerciseDetails extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 "Muscle Groups",
-                style: theme.textTheme.subtitle1,
+                style: theme.text!.subtitle,
               ),
             )),
         SizedBox(

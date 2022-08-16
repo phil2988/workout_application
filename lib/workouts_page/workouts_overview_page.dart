@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:workout_application/general-components/app_card.dart';
 import 'package:workout_application/general_functions/futurebuilder_builder.dart';
-import 'package:workout_application/general_functions/get_appbar_functions.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
+
 import '../app_configs.dart';
 import '../general_functions/on_tap_functions.dart';
 import '../models/workout.dart';
@@ -16,12 +17,53 @@ class WorkoutsOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ThemeHandler().getTheme();
     return Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        appBar: getWorkoutsOverviewAppBar(() {}),
+        backgroundColor: theme.color!.background,
         body: FutureBuilder(
             future: getWorkouts(),
             builder: (context, AsyncSnapshot<List<Workout>> snapshot) {
-              List<AppCard> cards = [];
+              List<Widget> cards = [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 30, 0, 20),
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return Row(
+                        children: [
+                          SizedBox(
+                            width: constraints.maxWidth * 0.1,
+                          ),
+                          SizedBox(
+                            width: constraints.maxWidth * 0.8,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Workouts Overview",
+                                style: theme.text!.title,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: constraints.maxWidth * 0.1,
+                            child: RawMaterialButton(
+                              fillColor: const Color(0xff73D493),
+                              padding: EdgeInsets.zero,
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(30))),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ];
               if (snapshot.hasData) {
                 for (var item in snapshot.data as List<Workout>) {
                   cards.add(AppCard(
@@ -39,7 +81,7 @@ class WorkoutsOverview extends StatelessWidget {
                       heightFactor: 1,
                       child: SingleChildScrollView(
                           child: Padding(
-                        padding: titlePadding,
+                        padding: EdgeInsets.zero,
                         child: Container(
                           alignment: Alignment.topCenter,
                           child: Column(children: cards),

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 getFutureBuilderErrorHandling({
   required AsyncSnapshot snapshot,
@@ -9,21 +9,23 @@ getFutureBuilderErrorHandling({
   switch (snapshot.connectionState) {
     case ConnectionState.none:
       return Container(
+        padding: const EdgeInsets.only(top: 50),
         child: Text(
           "Error! No Connection!",
-          style: theme.textTheme.subtitle1,
+          style: theme.text!.subtitle,
         ),
         alignment: Alignment.topCenter,
-        color: theme.colorScheme.background,
+        color: theme.color!.background,
       );
     case ConnectionState.waiting:
       return Container(
+        padding: const EdgeInsets.only(top: 50),
         child: Text(
           "Loading...",
-          style: theme.textTheme.subtitle1,
+          style: theme.text!.subtitle,
         ),
         alignment: Alignment.topCenter,
-        color: theme.colorScheme.background,
+        color: theme.color!.background,
       );
     default:
       if (snapshot.hasError) {

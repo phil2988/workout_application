@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_application/app_configs.dart';
 import 'package:workout_application/start_workout/start_workout_page.dart';
@@ -6,10 +7,15 @@ import 'package:workout_application/workout_icons.dart';
 import 'package:workout_application/workouts_page/workouts_overview_page.dart';
 
 import 'exercises_page/exercises_overview_page.dart';
-import 'theme/app_themes.dart';
+import 'theme/theme_handler.dart';
 
 void main() {
   // HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom]);
+
   return runApp(ChangeNotifierProvider<ThemeHandler>(
     create: (_) => ThemeHandler(),
     child: const RootWidget(),
@@ -29,11 +35,10 @@ class RootWidgetState extends State<RootWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: themeHandler.defaultTheme,
         home: Scaffold(
-          bottomNavigationBar: const NavBar(),
-          backgroundColor: Theme.of(context).backgroundColor,
-        ));
+      bottomNavigationBar: const NavBar(),
+      backgroundColor: Theme.of(context).backgroundColor,
+    ));
   }
 }
 
@@ -79,7 +84,7 @@ class _NavbarState extends State<NavBar> {
         home: Scaffold(
           body: Center(child: _pages.elementAt(selectedPageIndex)),
           bottomNavigationBar: Container(
-              color: theme.bottomNavigationBarTheme.backgroundColor,
+              color: theme.navbar!.background,
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   getNavbarItems() {
@@ -94,18 +99,14 @@ class _NavbarState extends State<NavBar> {
                             text: text[i],
                             onTapEvent: () => updatePage(i),
                             selected: i == selectedPageIndex,
+                            // We need to have middle icon be bigger -> i == 2
                             unselectedIconSize: i == 2
-                                ? theme.bottomNavigationBarTheme
-                                        .unselectedIconTheme!.size! +
-                                    10
-                                : theme.bottomNavigationBarTheme
-                                    .unselectedIconTheme!.size,
+                                ? theme.navbar!.unselectedIcon!.size! + 10
+                                : theme.navbar!.unselectedIcon!.size,
                             selectedIconSize: i == 2
-                                ? theme.bottomNavigationBarTheme
-                                        .unselectedIconTheme!.size! +
-                                    7
-                                : theme.bottomNavigationBarTheme
-                                    .unselectedIconTheme!.size,
+                                ? theme.navbar!.unselectedIcon!.size! + 7
+                                : theme.navbar!.unselectedIcon!.size,
+                            // First icon needs a little padding
                             iconPadding: i == 0
                                 ? const EdgeInsets.only(right: 15)
                                 : const EdgeInsets.all(0)),
@@ -115,13 +116,11 @@ class _NavbarState extends State<NavBar> {
                   }
 
                   return SizedBox(
-                      height: ThemeHandler()
-                          .getTheme()
-                          .bottomNavigationBarTheme
-                          .elevation,
+                      height: ThemeHandler().getTheme().navbar!.height,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: getNavbarItems(),
                       ));
                 },
@@ -142,7 +141,7 @@ class AppNavbarItem extends StatelessWidget {
     required this.text,
     required this.onTapEvent,
     this.selected = false,
-    this.itemPadding = defaultPadding,
+    this.itemPadding = const EdgeInsets.only(bottom: 12),
     this.iconPadding = EdgeInsets.zero,
     Key? key,
     this.selectedIconSize,
@@ -181,27 +180,23 @@ class AppNavbarItem extends StatelessWidget {
                     child: Icon(icon,
                         size: selected
                             ? selectedIconSize ??
-                                theme.bottomNavigationBarTheme
-                                    .selectedIconTheme!.size
+                                theme.navbar!.selectedIcon!.size
                             : unselectedIconSize ??
-                                theme.bottomNavigationBarTheme
-                                    .unselectedIconTheme!.size,
+                                theme.navbar!.unselectedIcon!.size,
                         color: selected
-                            ? theme.bottomNavigationBarTheme.selectedIconTheme!
-                                .color
-                            : theme.bottomNavigationBarTheme
-                                .unselectedIconTheme!.color),
+                            ? theme.navbar!.selectedIcon!.color
+                            : theme.navbar!.selectedIcon!.color),
                   ),
                 ),
                 Align(
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment.topCenter,
                   child: FittedBox(
                     fit: BoxFit.contain,
                     child: Text(
                       text,
                       style: selected
-                          ? theme.bottomNavigationBarTheme.selectedLabelStyle
-                          : theme.bottomNavigationBarTheme.unselectedLabelStyle,
+                          ? theme.navbar!.selectedText
+                          : theme.navbar!.unselectedText,
                       textAlign: TextAlign.end,
                     ),
                   ),

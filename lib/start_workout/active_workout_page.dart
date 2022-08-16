@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_application/start_workout/workout_exercise_form.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 import '../models/workout.dart';
 
@@ -13,16 +13,16 @@ class ActiveWorkoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ThemeHandler().getTheme();
     return Scaffold(
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.color!.background,
         appBar: AppBar(
-            backgroundColor: theme.colorScheme.background,
-            title: Text(workout.title, style: theme.textTheme.subtitle1),
+            backgroundColor: theme.color!.background,
+            title: Text(workout.title, style: theme.text!.subtitle),
             centerTitle: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
               WorkoutExerciseForm(
-                exercises: workout.exercises.exercises,
+                exercises: workout.exercises,
               ),
             ],
           ),

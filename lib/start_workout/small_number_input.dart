@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_application/app_configs.dart';
-import 'package:workout_application/theme/app_themes.dart';
+import 'package:workout_application/theme/theme_handler.dart';
 
 class SmallNumberInput extends StatelessWidget {
   const SmallNumberInput(
@@ -42,7 +42,7 @@ class SmallNumberInput extends StatelessWidget {
 
     return Column(
       children: [
-        if (text != "") Text(text, style: theme.textTheme.button),
+        if (text != "") Text(text, style: theme.text!.button),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -54,7 +54,7 @@ class SmallNumberInput extends StatelessWidget {
                     FilteringTextInputFormatter.allow(RegExp(r"^[0-9]*$"))
                   ],
                   controller: controller,
-                  style: theme.textTheme.headline4,
+                  style: theme.text!.subsubtitle,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: getInputDecoration()),
