@@ -63,8 +63,7 @@ class WorkoutDetails extends StatelessWidget {
     List<AppListEntryExercise> listExercises = [];
     for (var i = 0; i < exercises.length; i++) {
       listExercises.add(AppListEntryExercise(
-        entryTitle: exercises[i].title,
-        entryDescription: exercises[i].description,
+        entryExercise: exercises[i],
         entryBackroundColor:
             i.isEven ? theme.color!.primary! : theme.color!.secondary!,
         entryPadding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
